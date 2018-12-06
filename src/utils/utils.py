@@ -1,10 +1,15 @@
 from collections import Iterable
+import editdistance as ed
 
 
 def is_iterable_not_str(obj): return not isinstance(obj, str) and isinstance(obj, Iterable)
 
 
 def unwrap_nested(nested, level = None):
+    '''
+    Unwraps list of list of ... on the given level
+    '''
+
     # print(nested, level)
     if level is None:
         level = -1
@@ -24,16 +29,17 @@ def unwrap_nested(nested, level = None):
 
 
 def find_closest(iterable, item):
-    '''finds closest in iterable d to item'''
+    '''
+    Finds closest in iterable d to item
+    '''
+    min_ed = ed.eval(iterable[0], item)
+    iterable_elements = set(iterable)
 
-    min_edit_dist = 999
-    iterable_elements =  set(iterable)
-
-    for terget_item in iterable:
-        dist = ed.eval(init_item, comp_item)
-        if dist < min_ed:
+    for target_item in iterable_elements:
+        dist = ed.eval(item, target_item)
+        if dist <= min_ed:
             min_ed = dist
-            answ_item = (min_ed, comp_item)
+            answ_item = (min_ed, target_item)
 
     return answ_item
 
