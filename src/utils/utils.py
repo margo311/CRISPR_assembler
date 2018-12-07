@@ -28,6 +28,13 @@ def unwrap_nested(nested, level = None):
         return unwrapped
 
 
+def revert_dict(d):
+    dr = {}
+    for item in d.items():
+        dr[item[1]] = item[0]
+    return dr
+
+
 def find_closest(iterable, item):
     '''
     Finds closest in iterable d to item

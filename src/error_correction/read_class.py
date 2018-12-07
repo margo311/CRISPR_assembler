@@ -1,4 +1,5 @@
 from src.utils import utils
+from src.error_correction.error_correction import ErrorCorrector
 
 import os
 
@@ -22,6 +23,14 @@ class Read:
 
     def _get_spacers_set(self):
         self.spacers = set(utils.unwrap_nested(self.pairs))
+
+    def correct_errors(self, threshold=5):
+        self.corrector = ErrorCorrector(threshold=threshold)
+
+        self.corrector.fit(self.pairs)
+        self.corrected_pairs = list(map(self.corrector.transform, self.pairs)) #TODO questionable
+
+
 
 
 

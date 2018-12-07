@@ -6,18 +6,20 @@ import argparse
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run error correction on pairs')
 
-    parser.add_argument('--input', dest='pairs_path', required = True)
-    parser.add_argument('--treashold', dest='treashold')
+    parser.add_argument('--input', dest='pairs_path')#, required = True)
+    parser.add_argument('--threshold', dest='threshold')
 
-    args = parser.parse_args()
+    args = parser.parse_args(['--input', '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/',
+                              '--threshold', 'a'])
 
     print(args)
 
     read = read_class.Read(args.pairs_path)
 
-    #TODO tests
-    print(read.pairs)
-    print(read.spacers)
+    read.correct_errors(2)
+
+    print(read.corrector.spacer_to_cluster_index)
+    print(read.corrected_pairs)
 
 
 
