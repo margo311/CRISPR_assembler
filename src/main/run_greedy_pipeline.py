@@ -1,4 +1,7 @@
 from src.error_correction import read_class
+
+from src.utils import plot_utils as pu
+
 import argparse
 
 
@@ -25,6 +28,11 @@ if __name__ == "__main__":
 
     read.correct_errors(2)
 
+    _ = read.graph_from_pairs()
+
+    if args.plot_path:
+        print("I'm plotting to ", args.plot_path)
+        pu.plot_gr(_, args.plot_path,  log = 1)
 
     print(read.corrector.spacer_to_cluster_index)
     print(read.corrected_pairs)

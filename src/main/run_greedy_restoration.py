@@ -2,22 +2,17 @@ from src.error_correction import read_class
 import argparse
 
 
+#TODO DO SMTH
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run error correction on pairs')
 
     parser.add_argument('--input_path', dest='pairs_path', required = True)
     parser.add_argument('--output_path', dest='save_path')
-    parser.add_argument('--plot_path', dest='plot_path')
     parser.add_argument('--threshold', dest='threshold')
 
-    args = parser.parse_args(['--input_path',
-                              '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/inp/',
-                              '--output_path',
-                              '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/out/',
-                              '--plot_path',
-                              '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/out/plot.pdf',
-                              '--threshold',
-                              'a'])
+    args = parser.parse_args(['--input_path', '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/inp/',
+                              '--output_path', '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/out/',
+                              '--threshold', 'a'])
 
     print(args)
 

@@ -8,7 +8,8 @@ class Read:
         if names is None:
             names = os.listdir(path)
 
-        self.pairs = [self._load_pairs_from_path(path + name, ' ') for name in names]
+        self.names = names
+        self.pairs = [self._load_pairs_from_path(path + name, ' ') for name in self.names]
 
         self._get_spacers_set()
 
@@ -30,6 +31,29 @@ class Read:
         self.corrector.fit(self.pairs)
         self.corrected_pairs = list(map(self.corrector.transform, self.pairs)) #TODO questionable
 
+        self.cluster_to_index = self.corrector.cluster_to_index
+        self.spacer_to_cluster_index = self.corrector.spacer_to_cluster_index
+
+    def graph_from_pairs(self, store=True):
+        graph = utils.graph_from_pairs(utils.unwrap_nested(self.corrected_pairs, 1), len(self.spacers))
+
+        if store:
+            self.graph = graph
+
+        return graph
+
+    def dump(self, path):
+        if not os.path.isdir(path):
+            os.makedirs(path)
+
+        names_meaningful = [name.split(".")[0] for name in self.names]
+
+        for name, pairs_list in zip(names_meaningful, self.corrected_pairs):
+            with open(path + name + "_cluster_inds", 'w') as f:
+                f.write('\n'.join(['\t'.join(map(str, pair)) for pair in  pairs_list]))
+
+        utils.dict_to_csv(self.cluster_to_index, path + names_meaningful[0] + "_cl_to_ind")
+        utils.dict_to_csv(self.spacer_to_cluster_index, path + names_meaningful[0] + "_sp_to_ind")
 
 
 

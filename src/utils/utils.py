@@ -1,5 +1,11 @@
 from collections import Iterable
+
 import editdistance as ed
+import numpy as np
+
+import csv
+
+
 
 
 def is_iterable_not_str(obj): return not isinstance(obj, str) and isinstance(obj, Iterable)
@@ -50,3 +56,26 @@ def find_closest(iterable, item):
 
     return answ_item
 
+
+def dict_to_csv(d, path):
+    with open(path, 'w') as f:
+        w = csv.writer(f)
+        w.writerows(d.items())
+
+
+def dict_from_csv(path):
+    with open(path, 'r') as f:
+        r = csv.reader()
+        return r.readlines(path)
+
+
+def graph_from_pairs(pairs, spacers_num=None, sparce=False):
+    if spacers_num is None:
+        spacers_num = len(set(unwrap_nested(pairs)))
+
+    graph = np.zeros((spacers_num, spacers_num), dtype=int)
+
+    for pair in pairs:
+        graph[pair[0], pair[1]] += 1
+
+    return graph
