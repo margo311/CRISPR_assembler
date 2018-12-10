@@ -18,20 +18,20 @@ if __name__ == "__main__":
     parser.add_argument('--error_threshold', dest='error_threshold', type=int, default=5)
     parser.add_argument('--assemble_threshold', dest='assemble_threshold', type=int, default=0)
 
-    args = parser.parse_args(['--pairs_path',
-                              '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_40/',
-                              '--pairs_names',
-                              'DVyg25_S464_R2_001_pairs.txt',
-                              #'/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/inp/test_pairs_2.txt',
-                              '--save_path',
-                              '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/out/',
-                              '--plot_name',
-                              'plot.pdf',
-                              '--error_threshold',
-                              '5',
-                              '--assemble_threshold',
-                              '1'
-                              ])
+    # args = parser.parse_args(['--pairs_path',
+    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_40/',
+    #                           '--pairs_names',
+    #                           'DVyg25_S464_R2_001_pairs.txt',
+    #                           #'/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/inp/test_pairs_2.txt',
+    #                           '--save_path',
+    #                           '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/out/',
+    #                           '--plot_name',
+    #                           'plot.pdf',
+    #                           '--error_threshold',
+    #                           '5',
+    #                           '--assemble_threshold',
+    #                           '1'
+    #                           ])
 
     print(args.pairs_names.split(" "))
 
