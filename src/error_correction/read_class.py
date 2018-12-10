@@ -35,7 +35,7 @@ class Read:
         self.spacer_to_cluster_index = self.corrector.spacer_to_cluster_index
 
     def graph_from_pairs(self, store=True):
-        graph = utils.graph_from_pairs(utils.unwrap_nested(self.corrected_pairs, 1), len(self.spacers))
+        graph = utils.graph_from_pairs(utils.unwrap_nested(self.corrected_pairs, 1), len(self.corrector.cluster_to_index))
 
         if store:
             self.graph = graph
