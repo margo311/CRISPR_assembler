@@ -18,6 +18,7 @@ if __name__ == "__main__":
     parser.add_argument('--error_threshold', dest='error_threshold', type=int, default=5)
     parser.add_argument('--assemble_threshold', dest='assemble_threshold', type=int, default=0)
 
+    args = parser.parse_args()
     # args = parser.parse_args(['--pairs_path',
     #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_40/',
     #                           '--pairs_names',
