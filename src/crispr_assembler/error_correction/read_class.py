@@ -1,5 +1,5 @@
-from src.utils import utils
-from src.error_correction.error_correction import ErrorCorrector
+from crispr_assembler.utils import utils
+from crispr_assembler.error_correction.error_correction import ErrorCorrector
 
 import os
 

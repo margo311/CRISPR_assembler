@@ -2,7 +2,7 @@
 import numpy as np
 
 from collections import Counter, OrderedDict
-from src.utils.utils import find_closest
+from ..utils.utils import find_closest
 
 
 class HierarchicalClustering:

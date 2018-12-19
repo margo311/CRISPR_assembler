@@ -1,5 +1,5 @@
-from src.error_correction.hierarchical_clustering import HierarchicalClustering
-from src.utils.utils import unwrap_nested, revert_dict
+from .hierarchical_clustering import HierarchicalClustering
+from ..utils.utils import unwrap_nested, revert_dict
 from collections import Counter
 
 

@@ -1,9 +1,8 @@
-from src.error_correction import read_class
+from crispr_assembler.error_correction import read_class
+from crispr_assembler.utils import plot_utils as pu
+from crispr_assembler.utils import hamiltonian_utils as hu
 
-from src.utils import plot_utils as pu
-from src.utils import hamiltonian_utils as hu
-
-import src.utils.utils as utils
+import crispr_assembler.utils.utils as utils
 import argparse
 
 
@@ -20,18 +19,18 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     # args = parser.parse_args(['--pairs_path',
-    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_40/',
+    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/clostr_11_12/out/pairs/',
     #                           '--pairs_names',
-    #                           'DVyg25_S464_R2_001_pairs.txt',
+    #                           'CDisolate77_S11_L001_R1_001.fastq.gz_pairs.txt',
     #                           #'/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/inp/test_pairs_2.txt',
     #                           '--save_path',
-    #                           '/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/out/',
+    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/clostr_11_12/out/restored/',
     #                           '--plot_name',
-    #                           'plot.pdf',
+    #                           'CDisolate77_S11_L001_R1_001.pdf',
     #                           '--error_threshold',
-    #                           '5',
+    #                           '6',
     #                           '--assemble_threshold',
-    #                           '1'
+    #                           '0'
     #                           ])
 
     print(args.pairs_names.split(" "))
@@ -60,18 +59,24 @@ if __name__ == "__main__":
 
     utils.write_list_of_lists(args.save_path + args.pairs_names.split(" ")[0].split(".")[0] +"_arrays_num",
                               arrays,
-                              str
+                              str,
+                              separator_1="\n"
                               )
 
     utils.write_list_of_lists(args.save_path + args.pairs_names.split(" ")[0].split(".")[0] + "_arrays_sp",
                               arrays,
-                              lambda x : utils.revert_dict(read.cluster_to_index)[x]
+                              lambda x : utils.revert_dict(read.cluster_to_index)[x],
+                              separator_1="\n"
                               )
 
     utils.write_list_of_lists(args.save_path + args.pairs_names.split(" ")[0].split(".")[0] + "_weights",
                               weights,
-                              str
+                              str,
+                              separator_1="\n"
                               )
+
+    print("\n", args.pairs_names,"\n", sum([x for y in weights for x in y])  / read.graph.sum())
+
 
     #print(arrays, weights)
     # print(read.corrector.spacer_to_cluster_index)

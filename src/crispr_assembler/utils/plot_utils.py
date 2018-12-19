@@ -34,4 +34,4 @@ def plot_gr(gr, save_path, start=0, end=-1, log = False, all_ticks = False, s=10
         plt.yticks(np.arange(start,end))
 
     f.savefig(save_path)
-    plt.show()
+    #plt.show()

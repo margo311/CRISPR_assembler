@@ -81,11 +81,13 @@ def graph_from_pairs(pairs, spacers_num=None, sparce=False):
     return graph
 
 
-def write_list_of_lists(path, list_of_lists, transform = None, separator_1 = "\n", separartor_2 = ", "):
+def write_list_of_lists(path, list_of_lists, transform = None, separator_1 = "\n", separator_2 = ", "):
     if transform is None:
         def transform(x): return x
 
     with open(path, 'w') as f:
         f.write(separator_1.join([
-            separartor_2.join([transform(x) for x in y]) for y in list_of_lists
+            separator_2.join([transform(x) for x in y]) for y in list_of_lists
         ]))
+
+
