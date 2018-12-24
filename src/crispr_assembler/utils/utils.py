@@ -6,8 +6,6 @@ import numpy as np
 import csv
 
 
-
-
 def is_iterable_not_str(obj): return not isinstance(obj, str) and isinstance(obj, Iterable)
 
 
@@ -45,7 +43,7 @@ def find_closest(iterable, item):
     '''
     Finds closest in iterable d to item
     '''
-    min_ed = ed.eval(iterable[0], item)
+    min_ed = ed.eval(next(iter(iterable)), item)
     iterable_elements = set(iterable)
 
     for target_item in iterable_elements:
@@ -64,9 +62,12 @@ def dict_to_csv(d, path):
 
 
 def dict_from_csv(path):
+    d = {}
     with open(path, 'r') as f:
-        r = csv.reader()
-        return r.readlines(path)
+        r = csv.reader(f)
+        for row in r:
+            d[row[0]] = row[1]
+    return  d
 
 
 def graph_from_pairs(pairs, spacers_num=None, sparce=False):
@@ -81,13 +82,33 @@ def graph_from_pairs(pairs, spacers_num=None, sparce=False):
     return graph
 
 
-def write_list_of_lists(path, list_of_lists, transform = None, separator_1 = "\n", separator_2 = ", "):
+def write_list_of_lists(path,
+                        list_of_lists,
+                        transform = None,
+                        separator_1 = "\n",
+                        separator_2 = ", ",
+                        add_ids=True):
     if transform is None:
         def transform(x): return x
 
+
+    list_with_ids = []
+    if add_ids:
+        for id, el in enumerate(list_of_lists):
+            list_with_ids.append(f'array_{id}')
+            list_with_ids.append(separator_2.join(list(map(transform, el))))
+    else:
+        list_with_ids = [separator_2.join(list(map(transform, x))) for x in list_of_lists]
+
     with open(path, 'w') as f:
-        f.write(separator_1.join([
-            separator_2.join([transform(x) for x in y]) for y in list_of_lists
-        ]))
+        f.write(separator_1.join(list_with_ids))
 
 
+def transform_spacer_to_id(spacer, spacer_to_id, warn_threshold=5):
+    dist, ref_spacer = find_closest(spacer_to_id.keys(), spacer)
+
+    if dist > warn_threshold:
+        print("WARNING! spacer {0} is {1} errors from the closest, returning -1 ".format(spacer, dist))
+        return -1
+
+    return spacer_to_id[ref_spacer]

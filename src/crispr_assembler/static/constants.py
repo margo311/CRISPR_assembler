@@ -17,3 +17,17 @@ reverse = {
     "(" : "(",
     ")" : ")"
 }
+
+IUPAC_WILDCARDS = {
+    "W" : "AT",
+    "S" : "CG",
+    "M" : "AC",
+    "K" : "GT",
+    "R" : "AG",
+    "Y" : "CT",
+    "B" : "CGT",
+    "D" : "AGT",
+    "H" : "ACT",
+    "V" : "ACG",
+    "N" : "ACGT",
+}

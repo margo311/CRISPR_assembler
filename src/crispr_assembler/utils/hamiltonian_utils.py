@@ -1,8 +1,6 @@
 
 import numpy as np
-import matplotlib.pyplot as plt
-from tqdm import tqdm_notebook
-import pickle
+
 import editdistance as ed
 
 class Component:
@@ -198,11 +196,11 @@ def split(chain, weights):
     return np.split(chain, splits + 1), np.split(weights, splits)
 
 
-def search_best_alignment(a, b, t = 2):
+def search_best_alignment(a, b, t=1):
     answ = ('', '')
     indexes = (-1,-1,-1,-1)
     b_index = -1
-    
+
     for i, x in enumerate(b):
         curr_answ, curr_indexes = best_alignment(a, x, t)
         if len(curr_answ[0]) >= len(answ[0]) and len(curr_answ[1]) >= len(answ[1]):
