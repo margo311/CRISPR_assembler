@@ -10,8 +10,6 @@ class Arrays:
         with open(path) as f:
             lines = [x[:-1] for x in f.readlines()]
 
-
-
         if ',' in lines[1]:
             separator = ','
         else:

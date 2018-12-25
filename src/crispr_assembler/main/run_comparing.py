@@ -6,7 +6,6 @@ import argparse
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run error correction on pairs')
 
-    parser.add_argument('--path', dest='path')
     parser.add_argument('--cl_to_id', dest='cl_to_id')
     parser.add_argument('--arrays_sp', dest='arrays_sp')
     parser.add_argument('--answ_sp', dest='answ_sp')
@@ -17,23 +16,20 @@ if __name__ == "__main__":
     # parser.add_argument('--assemble_threshold', dest='assemble_threshold', type=int, default=0)
 
     #args = parser.parse_args()
-    args = parser.parse_args(['--path',
-                              '/home/anton/BigMac/skoltech/CRISPR_research/data/ecoli_11_12/out/restored/',
-                              '--cl_to_id',
-                              'Ecoli-planeA_S5_L001_R1_001_cl_to_ind',
+    args = parser.parse_args(['--cl_to_id',
+                              '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_20/restored/DVyg24_S463_R2_001_pairs/' +
+                              'DVyg24_S463_R2_001_pairs_cl_to_ind',
                               '--arrays_sp',
-                              'Ecoli-planeA_S5_L001_R1_001_arrays_sp',
+                              '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_20/restored/DVyg24_S463_R2_001_pairs/' +
+                              'DVyg24_S463_R2_001_pairs_arrays_sp',
                               '--answ_sp',
-                              'answ',
+                              '/home/anton/BigMac/skoltech/CRISPR_research/data/ecoli_11_12/out/restored/answ',
                               '--output',
                               'comparing_log'
                               ])
 
     print(args)
 
-    arrays = Arrays(args.path + args.arrays_sp, args.path + args.cl_to_id)
-    answ = Arrays(args.path + args.answ_sp, args.path + args.cl_to_id, 1)
-
-    comparator = Comparator(arrays, answ)
+    comparator = Comparator.load_from_path(args.arrays_sp, args.answ_sp, args.cl_to_id)
 
     comparator.search_ref_in_arrays()

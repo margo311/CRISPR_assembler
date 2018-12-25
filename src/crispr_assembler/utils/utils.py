@@ -5,6 +5,8 @@ import numpy as np
 
 import csv
 
+from crispr_assembler.utils.misc import rc
+
 
 def is_iterable_not_str(obj): return not isinstance(obj, str) and isinstance(obj, Iterable)
 
@@ -67,7 +69,7 @@ def dict_from_csv(path):
         r = csv.reader(f)
         for row in r:
             d[row[0]] = row[1]
-    return  d
+    return d
 
 
 def graph_from_pairs(pairs, spacers_num=None, sparce=False):
@@ -106,9 +108,34 @@ def write_list_of_lists(path,
 
 def transform_spacer_to_id(spacer, spacer_to_id, warn_threshold=5):
     dist, ref_spacer = find_closest(spacer_to_id.keys(), spacer)
-
     if dist > warn_threshold:
         print("WARNING! spacer {0} is {1} errors from the closest, returning -1 ".format(spacer, dist))
         return -1
-
     return spacer_to_id[ref_spacer]
+
+
+def read_arrays_with_tags(path, add_rc):
+    with open(path) as f:
+        lines = [x[:-1].replace(" ", "") for x in f.readlines()]
+
+    if ',' in lines[1]:
+        separator = ','
+    else:
+        separator = '\t'
+
+    arrays = dict(zip(lines[::2], lines[1::2]))
+
+    if add_rc:
+        for name, arr in zip(lines[::2], lines[1::2]):
+            arrays[name + "_rc"] = rc(arr, r=1)
+
+    for name, array in arrays.items():
+        arrays[name] = [sp for sp in array.split(separator) if len(sp) > 0]
+
+    return arrays
+
+
+def dict_to_lists(d):
+    keys = sorted(list(d.keys()))
+    values = [d[key] for key in keys]
+    return keys, values
