@@ -116,7 +116,10 @@ def transform_spacer_to_id(spacer, spacer_to_id, warn_threshold=5):
 
 def read_arrays_with_tags(path, add_rc):
     with open(path) as f:
-        lines = [x[:-1].replace(" ", "") for x in f.readlines()]
+        lines = [x[:-1] for x in f.readlines()]
+
+    lines[1::2] = [x.replace(" ", "") for x in lines[1::2]]
+
 
     if ',' in lines[1]:
         separator = ','

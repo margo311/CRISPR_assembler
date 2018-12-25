@@ -199,21 +199,21 @@ def split(chain, weights):
 def search_best_alignment(a, b, t=1):
     answ = ('', '')
     indexes = (-1,-1,-1,-1)
-    b_index = -1
+    b_name = -1
 
-    for i, x in enumerate(b):
-        curr_answ, curr_indexes = best_alignment(a, x, t)
+    for name, el in b.items():
+        curr_answ, curr_indexes = best_alignment(a, el, t)
         if len(curr_answ[0]) >= len(answ[0]) and len(curr_answ[1]) >= len(answ[1]):
             answ = curr_answ
             indexes = curr_indexes
-            b_index = i
-        curr_answ, curr_indexes = best_alignment(a[::-1], x, t)
+            b_name = name
+        curr_answ, curr_indexes = best_alignment(a[::-1], el, t)
         if len(curr_answ[0]) >= len(answ[0]) and len(curr_answ[1]) >= len(answ[1]):
             answ = curr_answ
             indexes = curr_indexes
-            b_index = i
+            b_name = name
         
-    return answ, b_index, indexes
+    return answ, b_name, indexes
 
 
 def best_alignment(a, b, t):
