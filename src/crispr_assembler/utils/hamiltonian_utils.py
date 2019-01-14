@@ -115,6 +115,7 @@ def comp_to_gr(components, spacers_num, o_gr = None):
     
     return gr
 
+
 def list_to_gr(components, spacers_num, o_gr = None):
     gr = np.zeros((spacers_num, spacers_num))
     
@@ -127,6 +128,21 @@ def list_to_gr(components, spacers_num, o_gr = None):
                 gr[a][b] = 1
     
     return gr
+
+
+def arrays_to_gr(components):
+    gr = np.zeros((spacers_num, spacers_num))
+
+    for k in components:
+        for a, b in zip(k, k[1:]):
+            if not o_gr is None:
+                if o_gr[a][b] > 0:
+                    gr[a][b] = 1
+            else:
+                gr[a][b] = 1
+
+    return gr
+
 
 def pairs_to_gr(pairs, spacers_num):
     gr = np.zeros((spacers_num, spacers_num))

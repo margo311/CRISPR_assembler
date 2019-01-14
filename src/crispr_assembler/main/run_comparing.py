@@ -15,18 +15,19 @@ if __name__ == "__main__":
     # parser.add_argument('--error_threshold', dest='error_threshold', type=int, default=5)
     # parser.add_argument('--assemble_threshold', dest='assemble_threshold', type=int, default=0)
 
-    args = parser.parse_args()
-    # args = parser.parse_args(['--cl_to_id',
-    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_20/restored/DVyg24_S463_R2_001_pairs/' +
-    #                           'DVyg24_S463_R2_001_pairs_cl_to_ind',
-    #                           '--arrays_sp',
-    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_20/restored/DVyg24_S463_R2_001_pairs/' +
-    #                           'DVyg24_S463_R2_001_pairs_arrays_sp',
-    #                           '--answ_sp',
-    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/ecoli_11_12/out/restored/answ',
-    #                           '--output',
-    #                           'comparing_log'
-    #                           ])
+    #args = parser.parse_args()
+    args = parser.parse_args(['--cl_to_id',
+                              '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_20/restored/DVyg24_S463_R2_001_pairs/' +
+                              'DVyg24_S463_R2_001_pairs_cl_to_ind',
+                              '--arrays_sp',
+                              '/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_20/restored/DVyg24_S463_R2_001_pairs/' +
+                              'DVyg24_S463_R2_001_pairs_arrays_sp',
+                              '--answ_sp',
+                              #'/home/anton/BigMac/skoltech/CRISPR_research/data/ecoli_11_12/out/restored/answ',
+                              '/home/anton/BigMac/skoltech/CRISPR_research/data/ecoli_11_12/out/restored/Ecoli-planeA_S5_L001_R1_001/Ecoli-planeA_S5_L001_R1_001_arrays_sp',
+                              '--output',
+                              'comparing_log'
+                              ])
 
     print(args)
 

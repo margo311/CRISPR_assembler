@@ -1,0 +1,667 @@
+Namespace(answ_sp='/home/anton/BigMac/skoltech/CRISPR_research/data/ecoli_11_12/out/restored/Ecoli-planeA_S5_L001_R1_001_arrays_sp', arrays_sp='/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_20/restored/DVyg24_S463_R2_001_pairs/DVyg24_S463_R2_001_pairs_arrays_sp', cl_to_id='/home/anton/BigMac/skoltech/CRISPR_research/data/student_Dvyg/EC/pairs_spget_20/restored/DVyg24_S463_R2_001_pairs/DVyg24_S463_R2_001_pairs_cl_to_ind', output='comparing_log')
+searched name: array_0
+ found name: array_1
+ searched_overlap: 0.8421052631578947
+ found_overlap: 0.9375
+ arrs:
+['259', '87', '78', '45', '3', '0', '18', '15', '8', '5', '9', '36', '19', '14', '17', '28', '47', '76', '119']
+['156', '45', '3', '0', '15', '8', '5', '9', '36', '19', '14', '17', '28', '47', '76', '119']
+_____________________
+
+searched name: array_1
+ found name: array_4
+ searched_overlap: 0.3076923076923077
+ found_overlap: 0.3870967741935484
+ arrs:
+['163', '156', '44', '1', '2', '4', '6', '26', '35', '37', '34', '12', '54', '31', '29', '23', '16', '22', '55', '71', '53', '46', '64', '107', '20', '32', '25', '13', '30', '7', '91', '72', '66', '116', '169', '183', '200', '189', '211']
+['79', '56', '42', '58', '57', '80', '89', '98', '75', '74', '65', '68', '70', '48', '39', '97', '104', '106', '124', '26', '35', '37', '34', '12', '54', '31', '29', '23', '16', '22', '99']
+_____________________
+
+searched name: array_2
+ found name: array_10
+ searched_overlap: 0.5185185185185185
+ found_overlap: 1.0
+ arrs:
+['133', '135', '27', '33', '96', '43', '49', '59', '41', '61', '85', '95', '125', '99', '113', '24', '21', '51', '86', '63', '40', '38', '52', '67', '62', '92', '129']
+['133', '135', '27', '33', '96', '43', '49', '59', '41', '61', '85', '95', '125']
+_____________________
+
+searched name: array_3
+ found name: array_0
+ searched_overlap: 0.8
+ found_overlap: 0.23529411764705882
+ arrs:
+['79', '11', '10', '50', '100']
+['404', '79', '11', '10', '60', '94', '93', '109', '120', '126', '20', '32', '25', '13', '30', '153', '146']
+_____________________
+
+searched name: array_4
+ found name: array_4
+ searched_overlap: 0.9047619047619048
+ found_overlap: 0.6129032258064516
+ arrs:
+['148', '132', '128', '56', '42', '58', '57', '80', '89', '98', '75', '74', '65', '68', '70', '48', '39', '97', '104', '106', '124']
+['79', '56', '42', '58', '57', '80', '89', '98', '75', '74', '65', '68', '70', '48', '39', '97', '104', '106', '124', '26', '35', '37', '34', '12', '54', '31', '29', '23', '16', '22', '99']
+_____________________
+
+searched name: array_5
+ found name: array_7
+ searched_overlap: 1.0
+ found_overlap: 0.6666666666666666
+ arrs:
+['253', '73', '69', '121']
+['87', '78', '73', '69', '121', '14']
+_____________________
+
+searched name: array_6
+ found name: array_8
+ searched_overlap: 0.8181818181818182
+ found_overlap: 0.9
+ arrs:
+['131', '83', '110', '117', '90', '77', '102', '130', '188', '198', '209']
+['131', '83', '110', '117', '90', '77', '102', '130', '199', '206']
+_____________________
+
+searched name: array_7
+ found name: array_3
+ searched_overlap: 1.0
+ found_overlap: 0.8461538461538461
+ arrs:
+['223', '108', '88', '105', '81', '103', '118', '123', '122', '115', '127']
+['148', '132', '128', '108', '88', '105', '81', '103', '118', '123', '122', '115', '127']
+_____________________
+
+searched name: array_8
+ found name: array_0
+ searched_overlap: 1.0
+ found_overlap: 0.4117647058823529
+ arrs:
+['60', '94', '93', '109', '120', '126', '84']
+['404', '79', '11', '10', '60', '94', '93', '109', '120', '126', '20', '32', '25', '13', '30', '153', '146']
+_____________________
+
+searched name: array_9
+ found name: array_2
+ searched_overlap: 0.9090909090909091
+ found_overlap: 1.0
+ arrs:
+['201', '186', '111', '82', '114', '101', '112', '168', '173', '162', '184']
+['308', '111', '82', '114', '101', '112', '168', '173', '162', '184']
+_____________________
+
+searched name: array_10
+ found name: array_12
+ searched_overlap: 1.0
+ found_overlap: 0.13157894736842105
+ arrs:
+['165', '134', '136', '137']
+['165', '134', '136', '137', '85', '150', '138', '167', '152', '142', '177', '181', '172', '160', '151', '147', '159', '175', '176', '154', '158', '174', '161', '155', '140', '182', '178', '144', '149', '139', '166', '141', '145', '157', '170', '195', '171', '196']
+_____________________
+
+searched name: array_11
+ found name: array_12
+ searched_overlap: 1.0
+ found_overlap: 0.8947368421052632
+ arrs:
+['150', '138', '167', '152', '142', '177', '181', '172', '160', '151', '147', '159', '175', '176', '154', '158', '174', '161', '155', '140', '182', '178', '144', '149', '139', '166', '141', '145', '157', '170', '195', '171', '196']
+['165', '134', '136', '137', '85', '150', '138', '167', '152', '142', '177', '181', '172', '160', '151', '147', '159', '175', '176', '154', '158', '174', '161', '155', '140', '182', '178', '144', '149', '139', '166', '141', '145', '157', '170', '195', '171', '196']
+_____________________
+
+searched name: array_12
+ found name: array_0
+ searched_overlap: 1.0
+ found_overlap: 0.17647058823529413
+ arrs:
+['153', '146']
+['404', '79', '11', '10', '60', '94', '93', '109', '120', '126', '20', '32', '25', '13', '30', '153', '146']
+_____________________
+
+searched name: array_13
+ found name: array_21
+ searched_overlap: 1.0
+ found_overlap: 1.0
+ arrs:
+['164', '143']
+['164', '143']
+_____________________
+
+searched name: array_14
+ found name: array_16
+ searched_overlap: 1.0
+ found_overlap: 0.8571428571428571
+ arrs:
+['191', '179', '208', '190', '180']
+['201', '186', '191', '179', '208', '190', '180']
+_____________________
+
+searched name: array_15
+ found name: array_15
+ searched_overlap: 1.0
+ found_overlap: 1.0
+ arrs:
+['185', '194', '187']
+['185', '194', '187']
+_____________________
+
+searched name: array_16
+ found name: array_14
+ searched_overlap: 1.0
+ found_overlap: 0.5714285714285714
+ arrs:
+['205', '210', '203']
+['188', '198', '209', '205', '210', '203', '224']
+_____________________
+
+searched name: array_17
+ found name: array_13
+ searched_overlap: 1.0
+ found_overlap: 1.0
+ arrs:
+['192', '204', '215']
+['192', '204', '215']
+_____________________
+
+searched name: array_18
+ found name: array_19
+ searched_overlap: 1.0
+ found_overlap: 0.6666666666666666
+ arrs:
+['202', '193', '221']
+['242', '213', '202', '193', '221', '325']
+_____________________
+
+searched name: array_19
+ found name: array_20
+ searched_overlap: 1.0
+ found_overlap: 1.0
+ arrs:
+['207', '212', '197']
+['207', '212', '197']
+_____________________
+
+searched name: array_20
+ found name: array_25
+ searched_overlap: 0.75
+ found_overlap: 1.0
+ arrs:
+['216', '217', '226', '270']
+[649, '216', '217', '226']
+_____________________
+
+searched name: array_21
+ found name: array_18
+ searched_overlap: 1.0
+ found_overlap: 0.5
+ arrs:
+['214', '225']
+['218', '295', '233', '220', '214', '225']
+_____________________
+
+searched name: array_22
+ found name: array_37
+ searched_overlap: 1.0
+ found_overlap: 1.0
+ arrs:
+['337', '336']
+['337', '336']
+_____________________
+
+searched name: array_23
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+['385', '384']
+[740, '22']
+_____________________
+
+searched name: array_24
+ found name: array_17
+ searched_overlap: 1.0
+ found_overlap: 0.6
+ arrs:
+['257', '261']
+[573, '68', '257', '261', '374']
+_____________________
+
+searched name: array_25
+ found name: array_18
+ searched_overlap: 1.0
+ found_overlap: 0.5
+ arrs:
+['233', '220']
+['218', '295', '233', '220', '214', '225']
+_____________________
+
+searched name: array_26
+ found name: array_19
+ searched_overlap: 1.0
+ found_overlap: 0.3333333333333333
+ arrs:
+['325', '218']
+['242', '213', '202', '193', '221', '325']
+_____________________
+
+searched name: array_27
+ found name: array_19
+ searched_overlap: 1.0
+ found_overlap: 0.5
+ arrs:
+['242', '213']
+['242', '213', '202', '193', '221', '325']
+_____________________
+
+searched name: array_28
+ found name: array_8
+ searched_overlap: 1.0
+ found_overlap: 0.3
+ arrs:
+['199', '206']
+['131', '83', '110', '117', '90', '77', '102', '130', '199', '206']
+_____________________
+
+searched name: array_0_rc
+ found name: array_44
+ searched_overlap: 0.05263157894736842
+ found_overlap: 0.5
+ arrs:
+[529, 486, 457, 438, 427, 424, 429, 446, 419, 415, 418, 425, 428, 410, 413, 455, 488, 497, 669]
+[740, '22']
+_____________________
+
+searched name: array_1_rc
+ found name: array_17
+ searched_overlap: 0.05128205128205128
+ found_overlap: 0.4
+ arrs:
+[621, 599, 610, 593, 579, 526, 476, 482, 501, 417, 440, 423, 435, 442, 430, 517, 474, 456, 463, 481, 465, 432, 426, 433, 439, 441, 464, 422, 444, 447, 445, 436, 416, 414, 412, 411, 454, 566, 573]
+[573, '68', '257', '261', '374']
+_____________________
+
+searched name: array_2_rc
+ found name: array_23
+ searched_overlap: 0.07407407407407407
+ found_overlap: 0.6666666666666666
+ arrs:
+[539, 502, 472, 477, 462, 448, 450, 473, 496, 461, 431, 434, 523, 509, 535, 505, 495, 471, 451, 469, 459, 453, 506, 443, 437, 545, 543]
+['347', '200', 506]
+_____________________
+
+searched name: array_3_rc
+ found name: array_31
+ searched_overlap: 0.4
+ found_overlap: 1.0
+ arrs:
+[510, 460, 420, 421, 489]
+['98', 489]
+_____________________
+
+searched name: array_4_rc
+ found name: array_44
+ searched_overlap: 0.047619047619047616
+ found_overlap: 0.5
+ arrs:
+[534, 516, 514, 507, 449, 458, 480, 478, 475, 484, 485, 508, 499, 490, 467, 468, 452, 466, 538, 542, 558]
+[740, '22']
+_____________________
+
+searched name: array_5_rc
+ found name: array_44
+ searched_overlap: 0.25
+ found_overlap: 0.5
+ arrs:
+[531, 479, 483, 663]
+[740, '22']
+_____________________
+
+searched name: array_6_rc
+ found name: array_26
+ searched_overlap: 0.18181818181818182
+ found_overlap: 1.0
+ arrs:
+[619, 608, 598, 540, 512, 487, 500, 527, 520, 493, 541]
+[500, 500]
+_____________________
+
+searched name: array_7_rc
+ found name: array_44
+ searched_overlap: 0.09090909090909091
+ found_overlap: 0.5
+ arrs:
+[537, 525, 532, 533, 528, 513, 491, 515, 498, 518, 633]
+[740, '22']
+_____________________
+
+searched name: array_8_rc
+ found name: array_41
+ searched_overlap: 0.2857142857142857
+ found_overlap: 1.0
+ arrs:
+[494, 536, 530, 519, 503, 504, 470]
+[470, '216']
+_____________________
+
+searched name: array_9_rc
+ found name: array_44
+ searched_overlap: 0.09090909090909091
+ found_overlap: 0.5
+ arrs:
+[594, 572, 583, 578, 522, 511, 524, 492, 521, 596, 611]
+[740, '22']
+_____________________
+
+searched name: array_10_rc
+ found name: array_32
+ searched_overlap: 0.5
+ found_overlap: 1.0
+ arrs:
+[547, 546, 544, 575]
+['342', 544]
+_____________________
+
+searched name: array_11_rc
+ found name: array_44
+ searched_overlap: 0.030303030303030304
+ found_overlap: 0.5
+ arrs:
+[606, 581, 605, 580, 567, 555, 551, 576, 549, 559, 554, 588, 592, 550, 565, 571, 584, 568, 564, 586, 585, 569, 557, 561, 570, 582, 591, 587, 552, 562, 577, 548, 560]
+[740, '22']
+_____________________
+
+searched name: array_12_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[556, 563]
+[740, '22']
+_____________________
+
+searched name: array_13_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[553, 574]
+[740, '22']
+_____________________
+
+searched name: array_14_rc
+ found name: array_44
+ searched_overlap: 0.2
+ found_overlap: 0.5
+ arrs:
+[590, 600, 618, 589, 601]
+[740, '22']
+_____________________
+
+searched name: array_15_rc
+ found name: array_44
+ searched_overlap: 0.3333333333333333
+ found_overlap: 0.5
+ arrs:
+[597, 604, 595]
+[740, '22']
+_____________________
+
+searched name: array_16_rc
+ found name: array_44
+ searched_overlap: 0.3333333333333333
+ found_overlap: 0.5
+ arrs:
+[613, 620, 615]
+[740, '22']
+_____________________
+
+searched name: array_17_rc
+ found name: array_44
+ searched_overlap: 0.3333333333333333
+ found_overlap: 0.5
+ arrs:
+[625, 614, 602]
+[740, '22']
+_____________________
+
+searched name: array_18_rc
+ found name: array_44
+ searched_overlap: 0.3333333333333333
+ found_overlap: 0.5
+ arrs:
+[631, 603, 612]
+[740, '22']
+_____________________
+
+searched name: array_19_rc
+ found name: array_44
+ searched_overlap: 0.3333333333333333
+ found_overlap: 0.5
+ arrs:
+[607, 622, 617]
+[740, '22']
+_____________________
+
+searched name: array_20_rc
+ found name: array_44
+ searched_overlap: 0.25
+ found_overlap: 0.5
+ arrs:
+[680, 636, 627, 626]
+[740, '22']
+_____________________
+
+searched name: array_21_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[635, 624]
+[740, '22']
+_____________________
+
+searched name: array_22_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[746, 747]
+[740, '22']
+_____________________
+
+searched name: array_23_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[794, 795]
+[740, '22']
+_____________________
+
+searched name: array_24_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[671, 667]
+[740, '22']
+_____________________
+
+searched name: array_25_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[630, 643]
+[740, '22']
+_____________________
+
+searched name: array_26_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[628, 735]
+[740, '22']
+_____________________
+
+searched name: array_27_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[623, 652]
+[740, '22']
+_____________________
+
+searched name: array_28_rc
+ found name: array_44
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+[616, 609]
+[740, '22']
+_____________________
+
+searched name: array_29
+ found name: array_18
+ searched_overlap: 1.0
+ found_overlap: 0.6666666666666666
+ arrs:
+['221', '248']
+['202', '193', '221']
+_____________________
+
+searched name: array_30
+ found name: array_27
+ searched_overlap: 1.0
+ found_overlap: 1.0
+ arrs:
+['242', '158']
+['242', '213']
+_____________________
+
+searched name: array_31
+ found name: array_3_rc
+ searched_overlap: 1.0
+ found_overlap: 0.4
+ arrs:
+['98', 489]
+[510, 460, 420, 421, 489]
+_____________________
+
+searched name: array_32
+ found name: array_10_rc
+ searched_overlap: 1.0
+ found_overlap: 0.5
+ arrs:
+['342', 544]
+[547, 546, 544, 575]
+_____________________
+
+searched name: array_33
+ found name: array_0
+ searched_overlap: 1.0
+ found_overlap: 0.10526315789473684
+ arrs:
+['15', '380']
+['259', '87', '78', '45', '3', '0', '18', '15', '8', '5', '9', '36', '19', '14', '17', '28', '47', '76', '119']
+_____________________
+
+searched name: array_34
+ found name: array_9
+ searched_overlap: 1.0
+ found_overlap: 0.18181818181818182
+ arrs:
+['376', '186']
+['201', '186', '111', '82', '114', '101', '112', '168', '173', '162', '184']
+_____________________
+
+searched name: array_35
+ found name: array_8
+ searched_overlap: 1.0
+ found_overlap: 0.42857142857142855
+ arrs:
+['94', '93']
+['60', '94', '93', '109', '120', '126', '84']
+_____________________
+
+searched name: array_36
+ found name: array_8_rc
+ searched_overlap: 1.0
+ found_overlap: 0.2857142857142857
+ arrs:
+['217', 530]
+[494, 536, 530, 519, 503, 504, 470]
+_____________________
+
+searched name: array_37
+ found name: array_22
+ searched_overlap: 1.0
+ found_overlap: 1.0
+ arrs:
+['337', '336']
+['337', '336']
+_____________________
+
+searched name: array_38
+ found name: array_28_rc
+ searched_overlap: 0.3333333333333333
+ found_overlap: 0.5
+ arrs:
+['366', '304', '314']
+[616, 609]
+_____________________
+
+searched name: array_39
+ found name: array_28_rc
+ searched_overlap: 0.3333333333333333
+ found_overlap: 0.5
+ arrs:
+[712, 757, 787]
+[616, 609]
+_____________________
+
+searched name: array_40
+ found name: array_28_rc
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+['237', '240']
+[616, 609]
+_____________________
+
+searched name: array_41
+ found name: array_8_rc
+ searched_overlap: 1.0
+ found_overlap: 0.2857142857142857
+ arrs:
+[470, '216']
+[494, 536, 530, 519, 503, 504, 470]
+_____________________
+
+searched name: array_42
+ found name: array_28_rc
+ searched_overlap: 0.5
+ found_overlap: 0.5
+ arrs:
+['219', 720]
+[616, 609]
+_____________________
+
+searched name: array_43
+ found name: array_11
+ searched_overlap: 1.0
+ found_overlap: 0.06060606060606061
+ arrs:
+[733, '140']
+['150', '138', '167', '152', '142', '177', '181', '172', '160', '151', '147', '159', '175', '176', '154', '158', '174', '161', '155', '140', '182', '178', '144', '149', '139', '166', '141', '145', '157', '170', '195', '171', '196']
+_____________________
+
+searched name: array_44
+ found name: array_1
+ searched_overlap: 1.0
+ found_overlap: 0.05128205128205128
+ arrs:
+[740, '22']
+['163', '156', '44', '1', '2', '4', '6', '26', '35', '37', '34', '12', '54', '31', '29', '23', '16', '22', '55', '71', '53', '46', '64', '107', '20', '32', '25', '13', '30', '7', '91', '72', '66', '116', '169', '183', '200', '189', '211']
+_____________________
+

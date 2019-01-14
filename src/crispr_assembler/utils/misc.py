@@ -1,10 +1,14 @@
-from ..static.constants import reverse, IUPAC_WILDCARDS
+from ..datastyle.constants import reverse, IUPAC_WILDCARDS
 import regex as re
 
 
-def read_fastq(path, cut):
-    with open(path) as f:
-        lines = f.readlines()[:cut * 4]
+def read_fastq(path, cut=None):
+    if cut is None:
+        with open(path) as f:
+            lines = f.readlines()
+    else:
+        with open(path) as f:
+            lines = f.readlines()[:cut * 4]
 
     reads = [x[:-1] for x in lines[1::4]]
     qualities = [x[:-1] for x in lines[3::4]]
@@ -50,7 +54,20 @@ def find(repeat, read, e=2):
     return [x.span() for x in re.finditer(p, read)]
 
 
-def split_read(read, quality, repeat, e=2, v=0):
+def split_read(read, repeat, quality=None, e=2, v=0):
+    if quality is None:
+        quality = 'Z' * len(read)
+
+    spacers, qualities = split_read_single_direction(read,repeat,quality,e,v)
+    inv = 0
+    if spacers[0] == -1:
+        spacers, qualities = split_read_single_direction(rc(read, r=1), repeat, quality, e, v)
+        inv = 1
+
+    return spacers, qualities, inv
+
+
+def split_read_single_direction(read, repeat, quality, e=2, v=0):
     repeat, repeat_s, repeat_e = repeat.r, repeat.rs, repeat.re
     repeat_pos = find(repeat, read, e)
 

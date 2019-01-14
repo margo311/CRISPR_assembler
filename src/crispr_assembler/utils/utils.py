@@ -57,6 +57,17 @@ def find_closest(iterable, item):
     return answ_item
 
 
+def find_closest_rc(d, sp, t=5):
+    answ_1 = find_closest(d, sp)
+    answ_2 = find_closest(d, ca.rc(sp, r=1))
+    if answ_1[0] < answ_2[0] and answ_1[0] <= t:
+        return answ_1
+    elif answ_2[0] <= answ_1[0] and answ_2[0] <= t:
+        return answ_2
+    else:
+        return [-1,-1]
+
+
 def dict_to_csv(d, path):
     with open(path, 'w') as f:
         w = csv.writer(f)

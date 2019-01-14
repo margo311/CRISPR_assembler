@@ -2,7 +2,7 @@ from crispr_assembler.error_correction import read_class
 from crispr_assembler.utils import plot_utils as pu
 from crispr_assembler.utils import hamiltonian_utils as hu
 
-import crispr_assembler.utils.utils as utils
+import crispr_assembler.utils as utils
 import argparse
 
 
@@ -45,6 +45,7 @@ if __name__ == "__main__":
 
     print("Ok. Building graph.")
     _ = read.graph_from_pairs()
+
 
     if args.plot_name:
         print("I'm plotting to ", args.save_path + args.plot_name)

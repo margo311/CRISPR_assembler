@@ -1,3 +1,6 @@
+from crispr_assembler.utils.utils import rc as rev_compl
+
+
 class Repeat:
     def __init__(self, r, rs, re, rc):
         self.r = r
@@ -5,10 +8,32 @@ class Repeat:
         self.re = re
         self.rc = rc
 
+    def complementary(self):
+        complementary = Repeat(r=rev_compl(self.r),
+                               rs=rev_compl(self.rs),
+                               re=rev_compl(self.re),
+                               rc=rev_compl(self.rc))
+
+        return complementary
+
+    def reverse(self):
+        reverse = Repeat(r=self.r[::-1],
+                         rs=self.re[::-1],
+                         re=self.rs[::-1],
+                         rc=self.rc[::-1])
+
+        return reverse
+
+    def reverse_complementary(self):
+        return self.reverse().complementary()
+
+
 redundant = Repeat("GTTTTAKATTA(ACTAWRTGG)WATGTAAAK",
                    "GTTTTAKATTAACTAWRTGG",
                    "ACTAWRTGGWATGTAAAK",
                    "GTTTTAKATTAACTAWRTGGWATGTAAAK")
+
+#cdif = Repeat("ATTTACATTCCATATAGTTAATCTAAAAC")
 
 non_redundant_1 = Repeat("GTTTTATATTA(ACTAAGTGG)TATGTAAAG",
                            "GTTTTATATTAACTAAGTGG",
