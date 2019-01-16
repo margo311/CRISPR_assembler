@@ -39,11 +39,11 @@ def gr_to_pairs(adj):
     return pairs
 
 
-def arrays_to_gr(arrays):
-    G = nx.DiGraph()
-    for arr in arrays:
-        G.add_path(arr)
-    return G
+# def arrays_to_gr(arrays):
+#     G = nx.DiGraph()
+#     for arr in arrays:
+#         G.add_path(arr)
+#     return G
 
 def adj_to_gr(adj):
     G = nx.DiGraph()

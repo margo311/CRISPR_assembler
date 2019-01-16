@@ -131,7 +131,6 @@ def read_arrays_with_tags(path, add_rc):
 
     lines[1::2] = [x.replace(" ", "") for x in lines[1::2]]
 
-
     if ',' in lines[1]:
         separator = ','
     else:
@@ -149,7 +148,37 @@ def read_arrays_with_tags(path, add_rc):
     return arrays
 
 
+def read_num_arrays_with_tags(path, add_rc):
+    arrays_str = read_arrays_with_tags(path, add_rc)
+
+    return dict(zip(arrays_str.keys(), [list(map(int, x)) for x in arrays_str.values()]))
+
+
+def array_to_ids(array, sp_to_id):
+    return [sp_to_id[find_closest(list(sp_to_id.keys()), x)[1]] for x in array]
+
+
+def multiple_arrays_to_ids(arrays, sp_to_id):
+    arrays_num = {}
+    for k,v in arrays.items():
+        arrays_num[k] = array_to_ids(v, sp_to_id)
+
+    return arrays_num
+
+
 def dict_to_lists(d):
     keys = sorted(list(d.keys()))
     values = [d[key] for key in keys]
     return keys, values
+
+# def calculate_cl_to_ind(arrays):
+#     self.spacers_to_occurrences = \
+#         self.hierarchical_clustering.get_sorted_by_occurrences(unwrap_nested(pairs))
+#
+#     self.cluster_to_index, self.spacer_to_cluster_index = \
+#         self.hierarchical_clustering.hierarchical_clustering(
+#             self.spacers_to_occurrences.keys(),
+#             self.threshold
+#         )
+#
+#     self.index_to_cluster = revert_dict(self.cluster_to_index)

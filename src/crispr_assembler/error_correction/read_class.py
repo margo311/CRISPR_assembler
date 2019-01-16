@@ -4,7 +4,7 @@ from crispr_assembler.error_correction.error_correction import ErrorCorrector
 import os
 
 class Read:
-    def __init__(self, path, names=None):
+    def __init__(self, path,  names=None):
         if names is None:
             names = os.listdir(path)
 
@@ -25,8 +25,8 @@ class Read:
     def _get_spacers_set(self):
         self.spacers = set(utils.unwrap_nested(self.pairs))
 
-    def correct_errors(self, threshold=5):
-        self.corrector = ErrorCorrector(threshold=threshold)
+    def correct_errors(self, threshold=5, minimum_occurences=0):
+        self.corrector = ErrorCorrector(threshold, minimum_occurences)
 
         self.corrector.fit(self.pairs)
         self.corrected_pairs = list(map(self.corrector.transform, self.pairs)) #TODO questionable

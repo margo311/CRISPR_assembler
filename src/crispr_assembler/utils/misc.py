@@ -1,5 +1,6 @@
 from ..datastyle.constants import reverse, IUPAC_WILDCARDS
 import regex as re
+from functools import reduce
 
 
 def read_fastq(path, cut=None):
@@ -107,3 +108,11 @@ def split_read_single_direction(read, repeat, quality, e=2, v=0):
             right_spacer = -1
 
         return [left_spacer, right_spacer], [left_sp_q, right_sp_q]
+
+
+def determine_spacers_num(arrays, strategy='max'):
+    flatten_arrays = list(reduce(lambda a,b : a+b, arrays))
+    if strategy == 'max':
+        return max(flatten_arrays) + 1
+    else:
+        return len(set(flatten_arrays))

@@ -20,7 +20,7 @@ def plot_grs(*gr, start=0, end=-1, log = False, all_ticks = False,  s=10):
     plt.show()
 
 
-def plot_gr(gr, save_path, start=0, end=-1, log = False, all_ticks = False, s=10):
+def plot_gr(gr, save_path=None, start=0, end=-1, log = False, all_ticks = False, s=10):
     f = plt.figure(figsize=(s,s))
     if end == -1:
         end = gr.shape[0]
@@ -33,5 +33,6 @@ def plot_gr(gr, save_path, start=0, end=-1, log = False, all_ticks = False, s=10
         plt.xticks(np.arange(start,end))
         plt.yticks(np.arange(start,end))
 
-    f.savefig(save_path)
+    if save_path is not None:
+        f.savefig(save_path)
     #plt.show()

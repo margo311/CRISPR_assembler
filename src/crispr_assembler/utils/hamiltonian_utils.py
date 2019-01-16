@@ -2,6 +2,7 @@
 import numpy as np
 
 import editdistance as ed
+from crispr_assembler.utils.misc import determine_spacers_num
 
 class Component:
     def __init__(self):
@@ -116,12 +117,15 @@ def comp_to_gr(components, spacers_num, o_gr = None):
     return gr
 
 
-def list_to_gr(components, spacers_num, o_gr = None):
+def arrays_to_gr(components, spacers_num=None, o_gr = None):
+    if spacers_num is None:
+        spacers_num = determine_spacers_num(components)
+
     gr = np.zeros((spacers_num, spacers_num))
     
     for k in components:
         for a,b in zip(k, k[1:]):
-            if not o_gr is None:
+            if o_gr is not None:
                 if o_gr[a][b] > 0:
                     gr[a][b] = 1
             else:
@@ -130,18 +134,18 @@ def list_to_gr(components, spacers_num, o_gr = None):
     return gr
 
 
-def arrays_to_gr(components):
-    gr = np.zeros((spacers_num, spacers_num))
-
-    for k in components:
-        for a, b in zip(k, k[1:]):
-            if not o_gr is None:
-                if o_gr[a][b] > 0:
-                    gr[a][b] = 1
-            else:
-                gr[a][b] = 1
-
-    return gr
+# def arrays_to_gr(components):
+#     gr = np.zeros((spacers_num, spacers_num))
+#
+#     for k in components:
+#         for a, b in zip(k, k[1:]):
+#             if not o_gr is None:
+#                 if o_gr[a][b] > 0:
+#                     gr[a][b] = 1
+#             else:
+#                 gr[a][b] = 1
+#
+#     return gr
 
 
 def pairs_to_gr(pairs, spacers_num):

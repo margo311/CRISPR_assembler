@@ -1,4 +1,3 @@
-
 import numpy as np
 
 from collections import Counter, OrderedDict
@@ -10,12 +9,16 @@ class HierarchicalClustering:
         pass
 
     @staticmethod
-    def get_sorted_by_occurrences(iterable):
+    def get_sorted_by_occurrences(iterable, min_occurences):
         counter = Counter(iterable)
         ord_dict = OrderedDict()
 
         elements = np.array([x for x in counter.keys()])
         counts = np.array([x for x in counter.values()])
+
+        mask = counts > min_occurences
+
+        elements, counts = elements[mask], counts[mask]
 
         args_s = np.argsort(counts)[::-1]
 

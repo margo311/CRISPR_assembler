@@ -4,6 +4,7 @@ from crispr_assembler.utils import hamiltonian_utils as hu
 
 import crispr_assembler.utils as utils
 import argparse
+import numpy as np
 
 
 if __name__ == "__main__":
@@ -14,6 +15,9 @@ if __name__ == "__main__":
 
     parser.add_argument('--save_path', dest='save_path')
     parser.add_argument('--plot_name', dest='plot_name')
+    parser.add_argument('--plot_cut', dest='plot_cut', type=int, default=0)
+    parser.add_argument('--graph_name', dest='graph_name', default=None)
+    parser.add_argument('--min_occurrences', dest='min_occurrences', type=int, default=0)
     parser.add_argument('--error_threshold', dest='error_threshold', type=int, default=5)
     parser.add_argument('--assemble_threshold', dest='assemble_threshold', type=int, default=0)
 
@@ -39,17 +43,22 @@ if __name__ == "__main__":
     read = read_class.Read(args.pairs_path, args.pairs_names.split(" "))
 
     print("Now I'm correcting errors :\ ...")
-    read.correct_errors(args.error_threshold)
+    read.correct_errors(args.error_threshold, args.min_occurrences)
     print("Saving to ", args.save_path)
     read.dump(args.save_path)
 
     print("Ok. Building graph.")
-    _ = read.graph_from_pairs()
-
+    graph = read.graph_from_pairs()
 
     if args.plot_name:
+        plot_mask = graph.sum(0) > args.plot_cut
+
         print("I'm plotting to ", args.save_path + args.plot_name)
-        pu.plot_gr(_, args.save_path + args.plot_name,  log=1)
+        pu.plot_gr(graph[plot_mask][:, plot_mask], args.save_path + args.plot_name, all_ticks=1, log=1)
+
+    if args.graph_name is not None:
+        np.save(args.save_path+args.graph_name, graph)
+
 
     print("Finally greedy restoring arrays!")
     arrays, weights = hu.restore_arrays(read.graph, args.assemble_threshold)
