@@ -4,6 +4,10 @@ from crispr_assembler.utils.hamiltonian_utils import *
 from crispr_assembler.utils.repeats import *
 from crispr_assembler.utils.plot_utils import *
 
+
 from crispr_assembler.error_correction.read_class import *
 from crispr_assembler.error_correction.error_correction import *
+
 from crispr_assembler.assemblers.crispr_arrays import *
+
+from crispr_assembler.splitter.splitter import *

@@ -171,6 +171,16 @@ def dict_to_lists(d):
     values = [d[key] for key in keys]
     return keys, values
 
+
+def map_dict(d, func_k=None, func_v=None):
+    if func_k is None:
+        func_k = lambda x : x
+    if func_v is None:
+        func_v = lambda x : x
+
+    return dict(zip(map(func_k, d.keys()), map(func_v, d.values())))
+
+
 # def calculate_cl_to_ind(arrays):
 #     self.spacers_to_occurrences = \
 #         self.hierarchical_clustering.get_sorted_by_occurrences(unwrap_nested(pairs))
@@ -182,3 +192,11 @@ def dict_to_lists(d):
 #         )
 #
 #     self.index_to_cluster = revert_dict(self.cluster_to_index)
+
+
+def drop_subsequent_duplicates(l):
+    filtered_l = []
+    for el in l:
+        if len(filtered_l) == 0 or el != filtered_l[-1]:
+            filtered_l.append(el)
+    return filtered_l
