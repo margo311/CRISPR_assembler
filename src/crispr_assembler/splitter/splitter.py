@@ -63,8 +63,7 @@ def split_read(read, pattern, idxes=None, e=2, v=0):
 
 
 def split_read_by_repeat(read, repeat, full_repeat_idxes=None, e=2):
-    if full_repeat_idxes is None:
-        full_repeat_idxes = split_read(read, repeat.rc, e=e)#find(read, repeat.rc)
+    full_repeat_idxes = split_read(read, repeat.rc, idxes=full_repeat_idxes, e=e)
 
     repeat_start_idxes = split_read(read[full_repeat_idxes[0]],
                                     repeat.re)
@@ -77,6 +76,26 @@ def split_read_by_repeat(read, repeat, full_repeat_idxes=None, e=2):
     answer.append(slice(full_repeat_idxes[-1].start + repeat_end_idxes[0].start,
                         full_repeat_idxes[-1].start + repeat_end_idxes[0].stop))
     return drop_subsequent_duplicates(answer)
+
+
+def split_function(position, read, plus, quality, repeat, e=2, drop_last=True):
+    r, idxes_forward, idxes_reverse = check_reverse_complementarity(read, repeat.rc, e=e)
+
+    if r == 0:
+        idxes = idxes_forward
+        read = read
+        quality = quality
+    elif r == 1:
+        idxes = idxes_reverse
+        read = rc(read, r=1)
+        quality = quality[::-1]
+    else:
+        return -1, read, [read], [quality]
+
+    splits = split_read_by_repeat(read, repeat, idxes, e=e)
+
+    return r, read, [read[split] for split in splits], [quality[split] for split in splits]
+
 
 
 
