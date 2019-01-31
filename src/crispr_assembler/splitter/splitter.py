@@ -72,9 +72,9 @@ def split_read_by_repeat(read, repeat, full_repeat_idxes=None, e=2):
                                     repeat.rs)
 
     answer = repeat_start_idxes + full_repeat_idxes[1:-1]
-
-    answer.append(slice(full_repeat_idxes[-1].start + repeat_end_idxes[0].start,
-                        full_repeat_idxes[-1].start + repeat_end_idxes[0].stop))
+    if len(repeat_end_idxes) > 0 and len(full_repeat_idxes) > 0:
+        answer.append(slice(full_repeat_idxes[-1].start + repeat_end_idxes[0].start,
+                            full_repeat_idxes[-1].start + repeat_end_idxes[0].stop))
     return drop_subsequent_duplicates(answer)
 
 

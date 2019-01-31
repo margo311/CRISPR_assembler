@@ -4,7 +4,7 @@ from crispr_assembler.error_correction.error_correction import ErrorCorrector
 import os
 
 class Read:
-    def __init__(self, path,  names=None):
+    def __init__(self, path, names=None):
         if names is None:
             names = os.listdir(path)
 

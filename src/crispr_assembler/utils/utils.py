@@ -57,15 +57,15 @@ def find_closest(iterable, item):
     return answ_item
 
 
-def find_closest_rc(d, sp, t=5):
-    answ_1 = find_closest(d, sp)
-    answ_2 = find_closest(d, ca.rc(sp, r=1))
-    if answ_1[0] < answ_2[0] and answ_1[0] <= t:
-        return answ_1
-    elif answ_2[0] <= answ_1[0] and answ_2[0] <= t:
-        return answ_2
-    else:
-        return [-1,-1]
+# def find_closest_rc(d, sp, t=5):
+#     answ_1 = find_closest(d, sp)
+#     answ_2 = find_closest(d, ca.rc(sp, r=1))
+#     if answ_1[0] < answ_2[0] and answ_1[0] <= t:
+#         return answ_1
+#     elif answ_2[0] <= answ_1[0] and answ_2[0] <= t:
+#         return answ_2
+#     else:
+#         return [-1,-1]
 
 
 def dict_to_csv(d, path):
@@ -91,6 +91,19 @@ def graph_from_pairs(pairs, spacers_num=None, sparce=False):
 
     for pair in pairs:
         graph[pair[0], pair[1]] += 1
+
+    return graph
+
+
+def graph_from_arrays(arrays, spacers_num=None, sparce=False):
+    if spacers_num is None:
+        spacers_num = len(set(unwrap_nested(arrays)))
+
+    graph = np.zeros((spacers_num, spacers_num), dtype=int)
+
+    for arr in arrays:
+        for x,y in zip(arrays, arrays[1:]):
+            graph[x, y] += 1
 
     return graph
 
