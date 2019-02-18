@@ -10,9 +10,7 @@ import numpy as np
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run error correction on pairs')
 
-    parser.add_argument('--pairs_path', dest='pairs_path', required = True)
-    parser.add_argument('--pairs_names', dest='pairs_names')
-
+    parser.add_argument('--path', dest='path', required = True)
     parser.add_argument('--save_path', dest='save_path')
     parser.add_argument('--plot_name', dest='plot_name')
     parser.add_argument('--plot_cut', dest='plot_cut', type=int, default=0)
@@ -22,25 +20,22 @@ if __name__ == "__main__":
     parser.add_argument('--assemble_threshold', dest='assemble_threshold', type=int, default=0)
 
     args = parser.parse_args()
-    # args = parser.parse_args(['--pairs_path',
-    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/clostr_11_12/out/pairs/',
-    #                           '--pairs_names',
-    #                           'CDisolate77_S11_L001_R1_001.fastq.gz_pairs.txt',
-    #                           #'/home/anton/BigMac/skoltech/CRISPR_research/CRISPR_assembler/src/test/inp/test_pairs_2.txt',
+    # args = parser.parse_args(['--path',
+    #                           '/home/anton/BigMac/skoltech/CRISPR_research/crispr_assembler/test/inp/test_pairs_1.txt',
     #                           '--save_path',
-    #                           '/home/anton/BigMac/skoltech/CRISPR_research/data/clostr_11_12/out/restored/',
+    #                           '/home/anton/BigMac/skoltech/CRISPR_research/crispr_assembler/test/out/',
     #                           '--plot_name',
-    #                           'CDisolate77_S11_L001_R1_001.pdf',
+    #                           '322.pdf',
     #                           '--error_threshold',
-    #                           '6',
+    #                           '1',
     #                           '--assemble_threshold',
     #                           '0'
     #                           ])
 
-    print(args.pairs_names.split(" "))
+
 
     print("Hey! I'm reading reads :) ..")
-    read = read_class.Read(args.pairs_path, args.pairs_names.split(" "))
+    read = read_class.Read(args.path)
 
     print("Now I'm correcting errors :\ ...")
     read.correct_errors(args.error_threshold, args.min_occurrences)
@@ -51,7 +46,7 @@ if __name__ == "__main__":
     graph = read.graph_from_pairs()
 
     if args.plot_name:
-        plot_mask = graph.sum(0) > args.plot_cut
+        plot_mask = graph.sum(0) >= args.plot_cut
 
         print("I'm plotting to ", args.save_path + args.plot_name)
         pu.plot_gr(graph[plot_mask][:, plot_mask], args.save_path + args.plot_name, all_ticks=1, log=1)
@@ -67,25 +62,25 @@ if __name__ == "__main__":
     # with open(args.save_path + "arrays", 'w') as f:
     #     f.write("\n".join([",".join([str(spacer) for spacer in arr]) for arr in arrays]))
 
-    utils.write_list_of_lists(args.save_path + args.pairs_names.split(" ")[0].split(".")[0] +"_arrays_num",
+    utils.write_list_of_lists(args.save_path + args.path.split("/")[-1].split(".")[0] +"_arrays_num",
                               arrays,
                               str,
                               separator_1="\n"
                               )
 
-    utils.write_list_of_lists(args.save_path + args.pairs_names.split(" ")[0].split(".")[0] + "_arrays_sp",
+    utils.write_list_of_lists(args.save_path + args.path.split("/")[-1].split(".")[0] + "_arrays_sp",
                               arrays,
                               lambda x : utils.revert_dict(read.cluster_to_index)[x],
                               separator_1="\n"
                               )
 
-    utils.write_list_of_lists(args.save_path + args.pairs_names.split(" ")[0].split(".")[0] + "_weights",
+    utils.write_list_of_lists(args.save_path + args.path.split("/")[-1].split(".")[0] + "_weights",
                               weights,
                               str,
                               separator_1="\n"
                               )
 
-    print("\n", args.pairs_names,"\n", sum([x for y in weights for x in y])  / read.graph.sum())
+    print("\n", args.path.split("/")[-1], "\n", sum([x for y in weights for x in y]) / read.graph.sum())
 
 
     #print(arrays, weights)

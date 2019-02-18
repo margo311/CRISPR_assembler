@@ -6,16 +6,16 @@ import editdistance as ed
 
 
 class Comparator:
-    def __init__(self, restored, reference, sp_to_id):
+    def __init__(self, restored, reference, sp_to_id = None):
         self.restored = restored
         self.reference = reference
         self.sp_to_id = sp_to_id
 
-
-        for key, value in self.restored.items():
-            self.restored[key] = self.array_to_ids(value)
-        for key, value in self.reference.items():
-            self.reference[key] = self.array_to_ids(value)
+        if sp_to_id is not None:
+            for key, value in self.restored.items():
+                self.restored[key] = self.array_to_ids(value)
+            for key, value in self.reference.items():
+                self.reference[key] = self.array_to_ids(value)
 
         self.results = {}
         for key in restored.keys():

@@ -1,7 +1,9 @@
 import numpy as np
+from tqdm import tqdm
 
 from collections import Counter, OrderedDict
 from ..utils.utils import find_closest
+
 
 
 class HierarchicalClustering:
@@ -34,7 +36,7 @@ class HierarchicalClustering:
         item_to_cluster_index = {}
         cluster_index = 0
 
-        for item in sorted_iterable:
+        for item in tqdm(sorted_iterable):
             if len(clusters_to_index) == 0:
                 #if verbose: print("new spacer:", init_item[0], init_item[1])
                 clusters_to_index[item] = cluster_index

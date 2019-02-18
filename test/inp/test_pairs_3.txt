@@ -1,6 +1,12 @@
 AAA CCC GGG TTT
+!!! !!! !!! !!!
 CCC GGG
+!!! !!!
 CTC GGG
+!!! !!!
 GGG TTT
+!!! !!!
 GGG TTA
+!!! !!!
 GGG TTT
+!!! !!!

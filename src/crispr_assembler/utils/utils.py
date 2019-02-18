@@ -6,6 +6,7 @@ import numpy as np
 import csv
 
 from crispr_assembler.utils.misc import rc
+from tqdm import tqdm
 
 
 def is_iterable_not_str(obj): return not isinstance(obj, str) and isinstance(obj, Iterable)
@@ -20,10 +21,11 @@ def unwrap_nested(nested, level = None):
     if level is None:
         level = -1
     if level == 0 or (not is_iterable_not_str(nested)):
-        if isinstance(nested, str):
-            return [nested]
-        else:
-            return nested
+        # if isinstance(nested, str):
+        #     return [nested]
+        # else:
+        #     return nested
+        return [nested]
     else:
         unwrapped = []
 
@@ -97,15 +99,19 @@ def graph_from_pairs(pairs, spacers_num=None, sparce=False):
 
 def graph_from_arrays(arrays, spacers_num=None, sparce=False):
     if spacers_num is None:
-        spacers_num = len(set(unwrap_nested(arrays)))
+        spacers_num = len(set(unwrap_nested(arrays))) + 1
 
     graph = np.zeros((spacers_num, spacers_num), dtype=int)
+    errors = 0
 
     for arr in arrays:
-        for x,y in zip(arrays, arrays[1:]):
-            graph[x, y] += 1
+        for x,y in zip(arr, arr[1:]):
+            if x < spacers_num and y < spacers_num:
+                graph[x, y] += 1
+            else:
+                errors += 1
 
-    return graph
+    return graph, errors
 
 
 def write_list_of_lists(path,
@@ -168,15 +174,25 @@ def read_num_arrays_with_tags(path, add_rc):
 
 
 def array_to_ids(array, sp_to_id):
-    return [sp_to_id[find_closest(list(sp_to_id.keys()), x)[1]] for x in array]
+    array_idx = []
+    distances = []
+    for x in array:
+        dist, idx = find_closest(list(sp_to_id.keys()), x)
+        array_idx.append(sp_to_id[idx])
+        distances.append(dist)
+    #return [sp_to_id[find_closest(list(sp_to_id.keys()), x)[1]] for x in array]
+    return array_idx, distances
 
 
 def multiple_arrays_to_ids(arrays, sp_to_id):
     arrays_num = {}
-    for k,v in arrays.items():
-        arrays_num[k] = array_to_ids(v, sp_to_id)
+    distances = {}
+    for k,v in tqdm(arrays.items()):
+        idxs, dist = array_to_ids(v, sp_to_id)
+        arrays_num[k] = idxs
+        distances[k] = dist
 
-    return arrays_num
+    return arrays_num, distances
 
 
 def dict_to_lists(d):
@@ -213,3 +229,15 @@ def drop_subsequent_duplicates(l):
         if len(filtered_l) == 0 or el != filtered_l[-1]:
             filtered_l.append(el)
     return filtered_l
+
+
+def determine_splitter(line):
+    if '\t' in line:
+        return '\t'
+    elif ',' in line:
+        return ','
+    elif ' ' in line:
+        return ' '
+    else:
+        raise print('COULD NOT DETERMINE SPLITTER. RETURN \t BY DEFAULT')
+        return '\t'

@@ -13,4 +13,6 @@ from crispr_assembler.assemblers.crispr_arrays import *
 from crispr_assembler.splitter.splitter import *
 from crispr_assembler.fastq_processor.fastq_processor import *
 
+from crispr_assembler.comparator.comparator import *
+
 import crispr_assembler.splitter
