@@ -34,7 +34,7 @@ def wrap_function(sample):
 
 
 def process_function(position, read_, plus, quality):
-    return split_function(position, read_, plus, quality, repeat, e=3)
+    return split_function(position, read_, plus, quality, repeat, e=6)
 
 
 if __name__ == "__main__":

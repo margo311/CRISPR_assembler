@@ -4,6 +4,7 @@ import numpy as np
 import editdistance as ed
 from crispr_assembler.utils.misc import determine_spacers_num
 
+
 class Component:
     def __init__(self):
         self.chain = []

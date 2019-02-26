@@ -59,19 +59,22 @@ class Comparator:
             value.print()
 
 
-
 class Match:
-    def __init__(self, name_1, name_2, overlap_1, overlap_2, array_1, array_2):
+    def __init__(self, name_1, name_2, overlap_1, overlap_2, array_1, array_2, weights_1=None, weights_2=None):
         self.name_1 = name_1
         self.name_2 = name_2
         self.overlap_1 = overlap_1
         self.overlap_2 = overlap_2
         self.array_1 = array_1
         self.array_2 = array_2
+        self.weights_1 = weights_1
+        self.weights_2 = weights_2
 
     def print(self):
         print(f'searched name: {self.name_1}\n',
               f'found name: {self.name_2}\n',
               f'searched_overlap: {self.overlap_1}\n',
               f'found_overlap: {self.overlap_2}\n',
-              f'arrs:\n{self.array_1}\n{self.array_2}\n_____________________\n')
+              f'arrs (search, found): \n{self.array_1}\n{self.array_2}\n',
+              f'weights (search, found):\n{self.weights_1}\n{self.weights_2}\n',
+              f'_____________________\n',)
