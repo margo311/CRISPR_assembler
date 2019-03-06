@@ -47,6 +47,9 @@ def find_closest(iterable, item):
     '''
     Finds closest in iterable d to item
     '''
+    if len(iterable) == 0:
+        return len(item), -1
+
     min_ed = ed.eval(next(iter(iterable)), item)
     iterable_elements = set(iterable)
 
@@ -241,3 +244,20 @@ def determine_splitter(line):
     else:
         raise print('COULD NOT DETERMINE SPLITTER. RETURN \t BY DEFAULT')
         return '\t'
+
+
+def rearange(gr, order=None):
+    new_gr = np.zeros_like(gr)
+
+    # sums = np.arange(gr.shape[0])[::-1]
+    if order is None:
+        sums = gr.sum(0) + gr.sum(1)
+        # print(sums)
+        order = np.argsort(sums)[::-1]
+        # print(order)
+
+    for i in range(gr.shape[0]):
+        for j in range(gr.shape[1]):
+            new_gr[i, j] = gr[order[i], order[j]]
+
+    return new_gr, order
