@@ -33,6 +33,7 @@ Weights are weights of edges between spacers, not spacers occurences!
 Restore using filtering.
 
 .. code-block:: python
+
 	emb_calc = ca.EmbeddingsCalculator()
 	embs = emb_calc.fit_predict(graph)
 	
