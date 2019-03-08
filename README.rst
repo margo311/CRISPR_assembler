@@ -16,13 +16,10 @@ Process read, cluster spacer and build spacer graph
 .. code-block:: python
 
     import crispr_assembler as ca
-
-	read = ca.Read("PATH/TO/READ")
-	read.correct_errors()
-
-
-	graph = read.graph_from_pairs()[0]
-	ca.plot_gr(graph, log = 1, s = 10)
+    read = ca.Read("PATH/TO/READ")
+    read.correct_errors()
+    graph = read.graph_from_pairs()[0]
+    ca.plot_gr(graph, log = 1, s = 10)
 
 
 Restore using greedy pipeline (works ok on every dataset, can't allign spacer to more than one array)
