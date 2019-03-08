@@ -10,6 +10,7 @@ from crispr_assembler.error_correction.error_correction import *
 
 from crispr_assembler.assemblers.crispr_arrays import *
 from crispr_assembler.assemblers.embeddings_calculator import *
+from crispr_assembler.assemblers.chimeric_filter import *
 
 from crispr_assembler.splitter.splitter import *
 from crispr_assembler.fastq_processor.fastq_processor import *

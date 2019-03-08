@@ -6,7 +6,8 @@ setup(name='crispr_assembler',
                 'crispr_assembler.utils',
                 'crispr_assembler.datastyle',
                 'crispr_assembler.main',
-                'crispr_assembler.error_correction'],
+                'crispr_assembler.error_correction',
+                'crispr_assembler.assemblers'],
 
       package_dir={'':'src'}
       )

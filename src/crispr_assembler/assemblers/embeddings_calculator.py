@@ -3,12 +3,13 @@ import pickle
 import tqdm
 from multiprocessing import Pool
 
+
 class EmbeddingsCalculator:
     def __init__(self):
         self.embeddings = None
-
-    def fit(self, graph):
-        self.embeddings = self.build_embeddings(graph)
+        self.argsort_gr_i = None
+        self.argsort_gr_j = None
+        self.embeddings = None
 
     def get_embeddings(self):
         return self.embeddings
@@ -21,21 +22,25 @@ class EmbeddingsCalculator:
             self.argsort_gr_i[i] = np.argsort(gr[i])
             self.argsort_gr_j[:, i] = np.argsort(gr[:, i])
 
-    def build_embeddings(self, graph, njobs=8, function_set=None):
+    def fit_predict(self, graph, njobs=8, function_set=None):
+        if self.argsort_gr_j is None or self.argsort_gr_i is None:
+            self. make_argsorts(graph)
+
         if njobs > 1:
             p = Pool(njobs)
             inp = []
             for i in range(graph.shape[0]):
                 for j in range(graph.shape[1]):
                     inp.append([graph, i, j])
-            embs = p.map(self.get_vertex_emb,inp)
+            embs = p.map(self.get_vertex_emb, inp)
         else:
             embs = []
             for i in tqdm.tqdm(range(graph.shape[0])):
                 for j in range(graph.shape[1]):
-                    embs.append(self.get_vertex_emb(graph, i, j))
+                    embs.append(self.get_vertex_emb((graph, i, j)))
 
-        return np.stack(embs)
+        self.embeddings = np.stack(embs)
+        return self.embeddings
 
     def get_vertex_emb(self, arg):
         gr, i, j = arg

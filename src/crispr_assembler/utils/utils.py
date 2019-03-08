@@ -261,3 +261,49 @@ def rearange(gr, order=None):
             new_gr[i, j] = gr[order[i], order[j]]
 
     return new_gr, order
+
+
+def get_routes(graph, route, routes, vertex):
+    candidates = np.where(graph[vertex] > 0)[0]
+    #print(candidates)
+    if len(candidates) == 0:
+        #print("a", routes)
+        routes.append(route)
+    else:
+        is_final = 1
+        for candidate in candidates:
+            if not candidate in route:
+                is_final = 0
+                new_route = [x for x in route]
+                new_route.append(candidate)
+                #print('n', new_route)
+                get_routes(graph, new_route, routes,candidate)
+        if is_final:
+            #print("a", routes)
+            routes.append(route)
+
+
+def restore_arrays_all(graph):
+    start_vertexes = np.where(graph.sum(0) == 0)[0]
+
+    answ = []
+
+    for vertex in start_vertexes:
+        routes = []
+        route = [vertex]
+        get_routes(graph, route, routes, vertex)
+
+        answ.extend(routes)
+
+    return answ
+
+
+def get_weights(gr, arrays):
+    weights = []
+    for a in arrays:
+        w = []
+        for x, y in zip(a, a[1:]):
+            w.append(gr[x, y])
+        weights.append(w)
+
+    return weights
