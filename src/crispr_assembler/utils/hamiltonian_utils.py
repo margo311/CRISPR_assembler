@@ -59,8 +59,7 @@ class Component:
         return str(self.chain)
 
 
-
-def restore_arrays(graph, threashold = 0):
+def restore_arrays_greedy(graph, threashold = 0):
     components = {}
     name = 0
     for argmax in graph.flatten().argsort()[::-1]:

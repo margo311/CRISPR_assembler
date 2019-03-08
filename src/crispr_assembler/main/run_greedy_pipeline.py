@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 
     print("Finally greedy restoring arrays!")
-    arrays, weights = hu.restore_arrays(read.graph, args.assemble_threshold)
+    arrays, weights = hu.restore_arrays_greedy(read.graph, args.assemble_threshold)
 
 
     # with open(args.save_path + "arrays", 'w') as f:
