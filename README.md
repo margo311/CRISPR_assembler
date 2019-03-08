@@ -7,9 +7,9 @@ See example usage below.
 VER 0.1
 
 
------
+------------
 Python usage
------
+------------
 
 Process read, cluster spacer and build spacer graph
 
