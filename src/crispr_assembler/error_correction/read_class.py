@@ -9,7 +9,6 @@ class Read:
         self.contigs = self._load_contigs(path, input_type, splitter)
         self.spacers = self._get_spacers_set()
 
-
     @staticmethod
     def _load_contigs(path, input_type, splitter=None):
         with open(path) as f:
@@ -37,6 +36,7 @@ class Read:
         self.cluster_to_index = self.corrector.cluster_to_index
         self.index_to_cluster = self.corrector.index_to_cluster
         self.spacer_to_cluster_index = self.corrector.spacer_to_cluster_index
+        self.spacers_to_occurrences = self.corrector.spacers_to_occurrences
 
     def graph_from_pairs(self, store=True):
         #graph = utils.graph_from_pairs(utils.unwrap_nested(self.corrected_pairs, 1), len(self.corrector.cluster_to_index))

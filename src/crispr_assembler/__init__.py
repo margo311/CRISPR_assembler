@@ -17,4 +17,5 @@ from crispr_assembler.fastq_processor.fastq_processor import *
 
 from crispr_assembler.comparator.comparator import *
 
+from crispr_assembler.alignments.alignments_utils import *
 import crispr_assembler.splitter

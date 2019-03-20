@@ -4,9 +4,12 @@ import editdistance as ed
 import numpy as np
 
 import csv
+import os
 
 from crispr_assembler.utils.misc import rc
 from tqdm import tqdm
+
+import pickle
 
 
 def is_iterable_not_str(obj): return not isinstance(obj, str) and isinstance(obj, Iterable)
@@ -307,3 +310,83 @@ def get_weights(gr, arrays):
         weights.append(w)
 
     return weights
+
+
+def calc_noise_ratio(gr0, gr):
+    return 1 - gr[gr0>0].sum() / gr.sum(),\
+           ((gr > 0).sum() - (gr0 > 0).sum()) / gr.flatten().shape[0]
+
+
+def get_top_stats(graph, i, cut=10, axis=0):
+    return np.array(sorted(graph[i])[::-1][:10]), np.argsort(graph[i])[::-1][:10]
+
+#
+# def process_path(path, save=1):
+#     pairs_path = path + "/out/pairs/"
+#     files = sorted(os.listdir(pairs_path))
+#
+#     print(pairs_path + files[0])
+#
+#     read = Read(pairs_path + files[0])
+#     read.correct_errors(minimum_occurences=5)
+#     gr = read.graph_from_pairs()[0]
+#
+#     ec = ca.EmbeddingsCalculator()
+#     ec.make_argsorts(gr[:cut, :cut])
+#     embs = ec.fit_predict(gr[:cut, :cut], njobs=32)
+#
+#     if save:
+#         pickle.dump(read, open(path + "/read", 'wb'))
+#         np.save(path + "/graph", gr)
+#         np.save(path + "/embs", embs)
+#
+#     return read, gr, embs
+#
+#
+# def load_processed(path):
+#     return pickle.load(open(path + "/read", 'rb')), np.load(path + "/graph.npy"), np.load(path + "/embs.npy", embs)
+#
+#
+#
+# def unwrap_idx_to_spacer(idx_to_spacer):
+#     values_as_list = []
+#     for i in range(len(idx_to_spacer)):
+#         values_as_list.append(idx_to_spacer[i])
+#     return values_as_list
+#
+#
+# def continue_steps(reads, pointers):
+#     return any([pointers[i] < len(reads[i]) for i in range(len(reads))])
+#
+#
+# def merge_reads(reads, t=1, v=1):
+#     spacers_lists = [unwrap_idx_to_spacer(x) for x in
+#                      reads]  # [unwrap_idx_to_spacer(x.index_to_cluster) for x in reads]
+#     pointers = [0 for i in range(len(reads))]
+#     merged_sp_to_idxes = {}
+#     old_idx_to_new_idx = [{} for i in range(len(reads))]
+#
+#     curr = 0
+#     while continue_steps(spacers_lists, pointers):
+#         for i in range(len(reads)):
+#             if pointers[i] < len(reads[i]):
+#                 spacer = spacers_lists[i][pointers[i]]
+#
+#                 dist, closest = find_closest(merged_sp_to_idxes, spacer)
+#                 if dist > t:
+#                     merged_sp_to_idxes[spacer] = curr
+#                     # new_sp_to_ids[i][spacer] = curr
+#                     old_idx_to_new_idx[i][pointers[i]] = curr
+#                     curr += 1
+#                 else:
+#                     old_idx_to_new_idx[i][pointers[i]] = merged_sp_to_idxes[closest]
+#
+#                 pointers[i] += 1
+#
+#                 if curr % 100 == 0:
+#                     print(curr)
+#
+#                 if v:
+#                     print(i, pointers[i], spacer, dist, merged_sp_to_idxes)  # , new_sp_to_ids[1])
+#
+#     return merged_sp_to_idxes, old_idx_to_new_idx
