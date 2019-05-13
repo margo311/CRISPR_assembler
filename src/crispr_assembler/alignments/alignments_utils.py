@@ -79,8 +79,9 @@ def recalc_borders(alignment, seq, seq_i, seq_j, alg_i, alg_j):
 def preprint_seq(seq, min_border, max_border, start, end, cell_size = 4):
     seq_str = ['-']* (start - min_border) + [str(x) for x in seq] + ['-'] * (max_border - end)
     #print(seq_str)
-    return ''.join([' ' + el + ' ' * (cell_size - len(el) - 1) for el in seq_str])
+    return ''.join([' ' + el + ' ' * (cell_size - len(el) - 1) + ',' for el in seq_str])
     #return '[' + '  '.join(seq_str_allign)+"]"
+
 
 
 def print_alignments(alignments, seq, cell_size=4):

@@ -170,8 +170,6 @@ def a_in_b(a,b):
 def a_in_any_b(a,b):
     return any([a_in_b(a, x) for x in b])
 
-
-
 def a_close_to_b(a, b, t = 2):
     return ed.eval(a, b) <= 2
 

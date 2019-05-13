@@ -36,18 +36,15 @@ Restore using filtering.
 
 	emb_calc = ca.EmbeddingsCalculator()
 	embs = emb_calc.fit_predict(graph)
-	
 	chimera_filter = ca.ChimericFilter("PATH_TO_CRISPR_assembler/src/crispr_assembler/datastyle/pretrained_filters/gb_rep_to_rep_0")
 	filtred_graph = chimera_filter.filter_graph(graph, embs)
 	ca.plot_grs(graph[:100, :100], filtred_graph[:100, :100], log = 1)
-	
 	arrays = ca.restore_all(filtred_graph)
 
 
------
-
+-------------
 Concole usage
------
+-------------	
 
 
 Example input file is stored in ./test

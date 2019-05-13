@@ -7,6 +7,7 @@ import csv
 import os
 
 from crispr_assembler.utils.misc import rc
+from crispr_assembler.utils.hamiltonian_utils import a_in_any_b
 from tqdm import tqdm
 
 import pickle
@@ -266,41 +267,6 @@ def rearange(gr, order=None):
     return new_gr, order
 
 
-def get_routes(graph, route, routes, vertex):
-    candidates = np.where(graph[vertex] > 0)[0]
-    #print(candidates)
-    if len(candidates) == 0:
-        #print("a", routes)
-        routes.append(route)
-    else:
-        is_final = 1
-        for candidate in candidates:
-            if not candidate in route:
-                is_final = 0
-                new_route = [x for x in route]
-                new_route.append(candidate)
-                #print('n', new_route)
-                get_routes(graph, new_route, routes,candidate)
-        if is_final:
-            #print("a", routes)
-            routes.append(route)
-
-
-def restore_arrays_all(graph):
-    start_vertexes = np.where(graph.sum(0) == 0)[0]
-
-    answ = []
-
-    for vertex in start_vertexes:
-        routes = []
-        route = [vertex]
-        get_routes(graph, route, routes, vertex)
-
-        answ.extend(routes)
-
-    return answ
-
-
 def get_weights(gr, arrays):
     weights = []
     for a in arrays:
@@ -320,7 +286,92 @@ def calc_noise_ratio(gr0, gr):
 def get_top_stats(graph, i, cut=10, axis=0):
     return np.array(sorted(graph[i])[::-1][:10]), np.argsort(graph[i])[::-1][:10]
 
+
+def get_routes_all(graph, route, routes, vertex):
+    candidates = np.where(graph[vertex] > 0)[0]
+
+    if len(candidates) == 0:
+        routes.append(route)
+    else:
+        is_final = 1
+        for candidate in candidates:
+            if not candidate in route:
+                is_final = 0
+                new_route = [x for x in route]
+                new_route.append(candidate)
+                get_routes_all(graph, new_route, routes, candidate)
+        if is_final:
+            routes.append(route)
+
+
+def restore_arrays_all(graph, all_starts = 0):
+    start_vertexes = np.where(graph.sum(0) == 0)[0]
+    if all_starts:
+        start_vertexes = np.arange(graph.shape[0])
+
+    answ = []
+
+    for vertex in start_vertexes:
+        routes = []
+        route = [vertex]
+        get_routes_all(graph, route, routes, vertex)
+
+        answ.extend(routes)
+
+    def merge(a):
+        a_s = sorted(a, key=len)[::-1]
+        f_a = []
+        for array in a_s:
+            if not a_in_any_b(array, f_a):
+                f_a.append(array)
+        return f_a
+
+    return answ, merge(answ)
+
+
+# def get_routes_limited(graph, route, routes, vertex, verbose=0):
+#     candidates = np.where(graph[vertex] > 0)[0]
+#     # print(candidates)
+#     if len(candidates) == 0:
+#         # print("a", routes)
+#         if verbose:
+#             print(vertex, 'no edges')
+#         routes.append(route)
+#     else:
+#         is_final = 1
+#         for candidate in candidates:
 #
+#             #             if (len(route) < 2 and (not candidate in route)) or ((not candidate in route) and \
+#             #               (np.abs(gr[route[-1], candidate] - np.median(ca.get_weights(graph, [route])[0]) \
+#             #                       / np.median(ca.get_weights(graph, [route])[0] < 0.5)))):
+#             if not candidate in route:
+#
+#                 if len(route) > 1:
+#                     # m = np.median(ca.get_weights(graph, [route])[0])
+#                     weights = get_weights(graph, [route])[0]
+#                     min_idx = np.argmin([abs(x - gr[route[-1], candidate]) for x in weights])
+#                     m = abs(weights[min_idx] - gr[route[-1], candidate])
+#                     if verbose:
+#                         print(route,
+#                               candidate,
+#                               ca.get_weights(graph, [route])[0],
+#                               gr[route[-1], candidate],
+#                               m,
+#                               m / min(weights[min_idx], gr[route[-1], candidate]))
+#                 if (len(route) <= 1) or m / min(weights[min_idx], graph[route[-1], candidate]) < 1.5:
+#                     is_final = 0
+#                     new_route = [x for x in route]
+#                     new_route.append(candidate)
+#                     # print('n', new_route)
+#                     get_routes_limited(graph, new_route, routes, candidate, verbose)
+#         if is_final:
+#             # print("a", routes)
+#             routes.append(route)
+#
+
+
+
+
 # def process_path(path, save=1):
 #     pairs_path = path + "/out/pairs/"
 #     files = sorted(os.listdir(pairs_path))

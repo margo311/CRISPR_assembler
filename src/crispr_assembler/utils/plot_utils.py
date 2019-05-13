@@ -15,11 +15,11 @@ def plot_grs(*gr, start=0, end=-1, log = False, all_ticks = False,  s=10, subplo
     if log:
         for i in range(len(gr)): 
             #a[i // subplots_form[0]][i % subplots_form[0]].imshow(- np.log(gr[i][start:end,start:end] + 1), cmap='gray')
-            a[i].imshow(- np.log(gr[i][start:end,start:end] + 1), cmap='gray')
+            a[i].imshow(np.log(gr[i][start:end,start:end] + 1)) #, cmap='PiYG')
     else:
         for i in range(len(gr)): 
             #a[i // subplots_form[0]][i % subplots_form[0]].imshow(- gr[i][start:end,start:end], cmap='gray')
-            a[i].imshow(- gr[i][start:end,start:end], cmap='gray')
+            a[i].imshow(gr[i][start:end,start:end])#, cmap='gray')
             #a[i].colorbar()
 #     if all_ticks: 
 #         plt.xticks(np.arange(start,end))
@@ -45,9 +45,9 @@ def plot_gr(gr,
     if end == -1:
         end = gr.shape[0]
     if log:
-        im = ax.imshow(np.log(gr[start:end,start:end] + 1), cmap='gray')
+        im = ax.imshow(np.log(gr[start:end,start:end] + 1))#, cmap='gray')
     else:
-        im = ax.imshow(gr[start:end,start:end], cmap='gray')
+        im = ax.imshow(gr[start:end,start:end])#, cmap='gray')
 
 
 
