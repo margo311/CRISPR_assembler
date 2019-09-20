@@ -2,6 +2,7 @@ from crispr_assembler.utils.utils import *
 from crispr_assembler.utils.misc import *
 from crispr_assembler.utils.hamiltonian_utils import *
 from crispr_assembler.utils.plot_utils import *
+from crispr_assembler.utils.common_utils import *
 
 from crispr_assembler.datastyle.repeats import *
 

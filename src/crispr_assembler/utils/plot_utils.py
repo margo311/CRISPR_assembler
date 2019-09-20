@@ -50,14 +50,16 @@ def plot_gr(gr,
         im = ax.imshow(gr[start:end,start:end])#, cmap='gray')
 
 
-
+    a = plt.gca()
+    a.set_xticklabels(a.get_xticks(), {'family': 'monospace'})
+    a.set_yticklabels(a.get_yticks(), {'family': 'monospace'})
     if all_ticks or idx_to_sp is not None:
         if idx_to_sp is not None:
             fill = [idx_to_sp[i] for i in np.arange(start, end)]
         else:
             fill = np.arange(start, end)
-        plt.xticks(np.arange(start,end), fill, rotation = 90, fontsize=s)
-        plt.yticks(np.arange(start,end), fill, fontsize=s)
+        plt.xticks(np.arange(start,end), fill, rotation = 90, fontsize=s)#, prop={'family': 'monospace'})
+        plt.yticks(np.arange(start,end), fill, fontsize=s)#, fontfamily='courier new')
 
     divider = make_axes_locatable(ax)
     cax = divider.append_axes("right", size="5%", pad=0.2)

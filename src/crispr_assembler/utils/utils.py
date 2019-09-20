@@ -8,7 +8,7 @@ import os
 
 from crispr_assembler.utils.misc import rc
 from crispr_assembler.utils.hamiltonian_utils import a_in_any_b
-from tqdm import tqdm
+from tqdm import tqdm, tqdm_notebook
 
 import pickle
 
@@ -43,7 +43,10 @@ def unwrap_nested(nested, level = None):
 def revert_dict(d):
     dr = {}
     for item in d.items():
-        dr[item[1]] = item[0]
+        if type(item[1]) == list:
+            dr[tuple(item[1])] = item[0]
+        else:
+            dr[item[1]] = item[0]
     return dr
 
 
@@ -311,7 +314,7 @@ def restore_arrays_all(graph, all_starts = 0):
 
     answ = []
 
-    for vertex in start_vertexes:
+    for vertex in tqdm_notebook(start_vertexes):
         routes = []
         route = [vertex]
         get_routes_all(graph, route, routes, vertex)
@@ -321,7 +324,7 @@ def restore_arrays_all(graph, all_starts = 0):
     def merge(a):
         a_s = sorted(a, key=len)[::-1]
         f_a = []
-        for array in a_s:
+        for array in tqdm_notebook(a_s):
             if not a_in_any_b(array, f_a):
                 f_a.append(array)
         return f_a
