@@ -290,49 +290,71 @@ def get_top_stats(graph, i, cut=10, axis=0):
     return np.array(sorted(graph[i])[::-1][:10]), np.argsort(graph[i])[::-1][:10]
 
 
-def get_routes_all(graph, route, routes, vertex, cand_dict):
-    candidates = cand_dict[vertex]
+class Node:
+    def __init__(self, ID, visited = True):
+        self.ID = ID
+        self.visited = visited
+        self.nextNodes = []
 
-    if len(candidates) == 0:
-        routes.append(route)
-    else:
-        is_final = 1
-        for candidate in candidates:
-            if not candidate in route:
-                is_final = 0
-                new_route = route[:]
-                new_route.append(candidate)
-                get_routes_all(graph, new_route, routes, candidate, cand_dict)
-        if is_final:
-            routes.append(route)
+def dumpPath(path, node = False):
+    newPath = path[:]
+    if node:
+        newPath += [node]
+    result = ''
+    for node in newPath:
+        result += str(node.ID)
+    print(result)
+    
+    
+def manageNode(node, paths, pathsWithNode):
+    firstTime = not node.visited
+    node.visited = True
+    if not len(node.nextNodes):
+        for pathId in paths: # -- Если нода тупиковая, замыкаем все пути и валим !! ускорить итерирование
+            dumpPath(paths[pathId], node)
+        if firstTime:
+            dumpPath([node]) # -- Если путь из одной тупиковой ноды имеет смысл
+            del unvisitedNodes[node.ID]
+        return
+    if firstTime: #-- Если нода не тупиковая ноде еще не были, стартуем новый путь с нее
+        paths[node.ID] = []
+        del unvisitedNodes[node.ID]
+
+    pathsInWork = {}
+    if not node.ID in pathsWithNode:
+        pathsWithNode[node.ID] = {}
+    for pathId in paths:
+        if pathId in pathsWithNode[node.ID]: #-- Если путь уже включал ноду, замыкаем его
+            dumpPath(paths[pathId], node)
+        else:
+            paths[pathId] += [node] #-- Если путь еще не включал ноду, добавляем ноду
+            pathsWithNode[node.ID][pathId] = True  #-- Регистрируем путь под ключом ноды
+            pathsInWork[pathId] = paths[pathId] # Незамкнутые пути отправляются дальше по итерированию
+    if len(pathsInWork): # Если есть что итерировать дальше
+        for nextNode in node.nextNodes:
+            manageNode(nextNode, pathsInWork, pathsWithNode)
+    for pathId in pathsInWork: # Удаляем последнюю ноду из всех путей, над которыми работали
+        pathsInWork[pathId].pop()
+        pathsWithNode[node.ID].pop(pathId, None) # Удаляем регистрацию путей под нашей точкой
+    if firstTime: # Если мы приходили в эту точку в первый раз, нужно удалить сами пути из нее стартованные
+        paths.pop(node.ID, None)
 
 
 def restore_arrays_all(graph, all_starts = 0):
-    start_vertexes = np.where(graph.sum(0) == 0)[0]
-    cand = [np.where(graph[vertex] > 0)[0] for vertex in np.arange(graph.shape[0])]
-    cand_dict = dict(zip(np.arange(graph.shape[0]), cand))
-    if all_starts:
-        start_vertexes = np.arange(graph.shape[0])
-
+    starts = len(np.where(graph.sum(0) == 0)[0]
+    unvisitedNodes = dict(zip(np.where(graph.sum(0) == 0)[0], [True] * starts)
+    paths = {}
+    pathsWithNode = {}
+    nodes = dict(zip(np.arange(graph.shape[0]) , [Node(k) for k in np.arange(graph.shape[0])]))
+    for k in unvisitedNodes:
+        nodes[k].visited = False
+    for k in np.arange(graph.shape[0]):
+        for j in np.arange(graph.shape[1]):
+            if graph[k,j] > 0:
+                nodes[k].nextNodes += nodes[j]
     answ = []
-
-    for vertex in tqdm_notebook(start_vertexes):
-        routes = []
-        route = [vertex]
-        get_routes_all(graph, route, routes, vertex, cand_dict)
-
-        answ.extend(routes)
-
-    def merge(a):
-        a_s = sorted(a, key=len)[::-1]
-        f_a = []
-        for array in tqdm_notebook(a_s):
-            if not a_in_any_b(array, f_a):
-                f_a.append(array)
-        return f_a
-
-    return answ, merge(answ)
-
+    for node_id in unvisitedNodes:
+        manageNode(nodes[node_id], paths, pathsWithNode)
 
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
