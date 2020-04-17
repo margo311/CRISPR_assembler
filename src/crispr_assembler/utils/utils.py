@@ -303,7 +303,7 @@ def dumpPath(result, path, node = False):
     newPatharr = []
     for node in newPath:
         newPatharr.append(node.ID)
-    result.extend(newPatharr)
+    result.append([newPatharr])
     
     
 def manageNode(node, paths, pathsWithNode, result, unvisitedNodes):
