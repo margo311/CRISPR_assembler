@@ -290,7 +290,7 @@ def get_top_stats(graph, i, cut=10, axis=0):
     return np.array(sorted(graph[i])[::-1][:10]), np.argsort(graph[i])[::-1][:10]
 
 
-def get_routes_all(graph, route, routes, vertex):
+def get_routes_all(graph, route, routes, vertex, cand_dict):
     candidates = cand_dict[vertex]
 
     if len(candidates) == 0:
@@ -302,7 +302,7 @@ def get_routes_all(graph, route, routes, vertex):
                 is_final = 0
                 new_route = route[:]
                 new_route.append(candidate)
-                get_routes_all(graph, new_route, routes, candidate)
+                get_routes_all(graph, new_route, routes, candidate, cand_dict)
         if is_final:
             routes.append(route)
 
@@ -319,7 +319,7 @@ def restore_arrays_all(graph, all_starts = 0):
     for vertex in tqdm_notebook(start_vertexes):
         routes = []
         route = [vertex]
-        get_routes_all(graph, route, routes, vertex)
+        get_routes_all(graph, route, routes, vertex, cand_dict)
 
         answ.extend(routes)
 
