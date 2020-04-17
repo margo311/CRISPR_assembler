@@ -300,7 +300,7 @@ def get_routes_all(graph, route, routes, vertex):
         for candidate in candidates:
             if not candidate in route:
                 is_final = 0
-                new_route = [x for x in route]
+                new_route = route[:]
                 new_route.append(candidate)
                 get_routes_all(graph, new_route, routes, candidate)
         if is_final:
