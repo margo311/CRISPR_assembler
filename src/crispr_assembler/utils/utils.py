@@ -307,7 +307,7 @@ def dumpPath(result, path, node = False):
    # print(result)
     
     
-def manageNode(node, paths, pathsWithNode, result):
+def manageNode(node, paths, pathsWithNode, result, unvisitedNodes):
     firstTime = not node.visited
     node.visited = True
     if not len(node.nextNodes):
@@ -333,7 +333,7 @@ def manageNode(node, paths, pathsWithNode, result):
             pathsInWork[pathId] = paths[pathId] # Незамкнутые пути отправляются дальше по итерированию
     if len(pathsInWork): # Если есть что итерировать дальше
         for nextNode in node.nextNodes:
-            manageNode(nextNode, pathsInWork, pathsWithNode, result)
+            manageNode(nextNode, pathsInWork, pathsWithNode, result, unvisitedNodes)
     for pathId in pathsInWork: # Удаляем последнюю ноду из всех путей, над которыми работали
         pathsInWork[pathId].pop()
         pathsWithNode[node.ID].pop(pathId, None) # Удаляем регистрацию путей под нашей точкой
@@ -356,7 +356,7 @@ def restore_arrays_all(graph, all_starts = 0):
                 nodes[k].nextNodes.append(nodes[j])
     result = [0]
     for node_id in unvisitedNodes:
-        manageNode(nodes[node_id], paths, pathsWithNode, result)
+        manageNode(nodes[node_id], paths, pathsWithNode, result, unvisitedNodes)
     return result
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
