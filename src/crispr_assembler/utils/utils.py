@@ -353,7 +353,7 @@ def restore_arrays_all(graph, all_starts = 0):
     for k in np.arange(graph.shape[0]):
         for j in np.arange(graph.shape[1]):
             if graph[k,j] > 0:
-                nodes[k].nextNodes += nodes[j]
+                nodes[k].nextNodes.append(nodes[j])
     result = [0]
     for node_id in unvisitedNodes:
         manageNode(nodes[node_id], paths, pathsWithNode, result)
