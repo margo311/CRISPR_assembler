@@ -291,7 +291,7 @@ def get_top_stats(graph, i, cut=10, axis=0):
 
 
 def get_routes_all(graph, route, routes, vertex):
-    candidates = np.where(graph[vertex] > 0)[0]
+    candidates = cand_dict[vertex]
 
     if len(candidates) == 0:
         routes.append(route)
@@ -300,7 +300,7 @@ def get_routes_all(graph, route, routes, vertex):
         for candidate in candidates:
             if not candidate in route:
                 is_final = 0
-                new_route = route[:]
+                new_route = [x for x in route]
                 new_route.append(candidate)
                 get_routes_all(graph, new_route, routes, candidate)
         if is_final:
@@ -309,6 +309,8 @@ def get_routes_all(graph, route, routes, vertex):
 
 def restore_arrays_all(graph, all_starts = 0):
     start_vertexes = np.where(graph.sum(0) == 0)[0]
+    cand = [np.where(graph[vertex] > 0)[0] for vertex in np.arange(graph.shape[0])]
+    cand_dict = dict(zip(np.arange(graph.shape[0]), cand))
     if all_starts:
         start_vertexes = np.arange(graph.shape[0])
 
