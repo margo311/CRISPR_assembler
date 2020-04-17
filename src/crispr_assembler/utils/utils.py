@@ -355,8 +355,8 @@ def restore_arrays_all(graph, all_starts = 0):
             if graph[k,j] > 0:
                 nodes[k].nextNodes.append(nodes[j])
     result = [0]
-    for node_id in unvisitedNodes:
-        manageNode(nodes[node_id], paths, pathsWithNode, result, unvisitedNodes)
+    while unvisitedNodes:
+        manageNode(nodes[unvisitedNodes.keys()[0]], paths, pathsWithNode, result, unvisitedNodes)
     return result
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
