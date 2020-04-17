@@ -300,7 +300,7 @@ def dumpPath(result, path, node = False):
     newPath = path[:]
     if node:
         newPath += [node]
-    result[0] += 1
+    result.extend(newPath)
   #  result = ''
   #  for node in newPath:
   #      result += str(node.ID)
@@ -354,10 +354,20 @@ def restore_arrays_all(graph, all_starts = 0):
         for j in np.arange(graph.shape[1]):
             if graph[k,j] > 0:
                 nodes[k].nextNodes.append(nodes[j])
-    result = [0]
+    result = []
     while unvisitedNodes:
         manageNode(nodes[list(unvisitedNodes.keys())[0]], paths, pathsWithNode, result, unvisitedNodes)
-    return result
+        
+    def merge(a):
+        a_s = sorted(a, key=len)[::-1]
+        f_a = []
+        for array in tqdm_notebook(a_s):
+            if not a_in_any_b(array, f_a):
+                f_a.append(array)
+        return f_a
+
+    return result, merge(result)
+    #return result
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
 #     # print(candidates)
