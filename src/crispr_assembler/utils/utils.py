@@ -303,7 +303,7 @@ def dumpPath(result, path, node = False):
     newPatharr = []
     for node in newPath:
         newPatharr.append(node.ID)
-    result.append([newPatharr])
+    result.append(newPatharr)
     
     
 def manageNode(node, paths, pathsWithNode, result, unvisitedNodes):
@@ -365,7 +365,7 @@ def restore_arrays_all(graph, all_starts = 0):
                 f_a.append(array)
         return f_a
 
-    return result
+    return merge(result)
     #return result
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
