@@ -342,8 +342,9 @@ def manageNode(node, paths, pathsWithNode, result):
 
 
 def restore_arrays_all(graph, all_starts = 0):
-    starts = len(np.where(graph.sum(0) == 0)[0]
-    unvisitedNodes = dict(zip(np.where(graph.sum(0) == 0)[0], [True] * starts)
+    unvisitedNodes = {}
+    for k in np.where(graph.sum(0) == 0)[0]:
+        unvisitedNodes[k] = True
     paths = {}
     pathsWithNode = {}
     nodes = dict(zip(np.arange(graph.shape[0]) , [Node(k) for k in np.arange(graph.shape[0])]))
