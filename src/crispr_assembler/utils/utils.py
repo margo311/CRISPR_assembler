@@ -300,7 +300,7 @@ def dumpPath(result, path, node = False):
     newPath = path[:]
     if node:
         newPath += [node]
-    result.append(newPath)
+    result[0] += 1
   #  result = ''
   #  for node in newPath:
   #      result += str(node.ID)
@@ -353,7 +353,7 @@ def restore_arrays_all(graph, all_starts = 0):
         for j in np.arange(graph.shape[1]):
             if graph[k,j] > 0:
                 nodes[k].nextNodes += nodes[j]
-    result = []
+    result = [0]
     for node_id in unvisitedNodes:
         manageNode(nodes[node_id], paths, pathsWithNode, result)
     return result
