@@ -296,24 +296,25 @@ class Node:
         self.visited = visited
         self.nextNodes = []
 
-def dumpPath(path, node = False):
+def dumpPath(result, path, node = False):
     newPath = path[:]
     if node:
         newPath += [node]
-    result = ''
-    for node in newPath:
-        result += str(node.ID)
-    print(result)
+    result.append(newPath)
+  #  result = ''
+  #  for node in newPath:
+  #      result += str(node.ID)
+   # print(result)
     
     
-def manageNode(node, paths, pathsWithNode):
+def manageNode(node, paths, pathsWithNode, result):
     firstTime = not node.visited
     node.visited = True
     if not len(node.nextNodes):
         for pathId in paths: # -- Если нода тупиковая, замыкаем все пути и валим !! ускорить итерирование
-            dumpPath(paths[pathId], node)
+            dumpPath(result, paths[pathId], node)
         if firstTime:
-            dumpPath([node]) # -- Если путь из одной тупиковой ноды имеет смысл
+            dumpPath(result, [node]) # -- Если путь из одной тупиковой ноды имеет смысл
             del unvisitedNodes[node.ID]
         return
     if firstTime: #-- Если нода не тупиковая ноде еще не были, стартуем новый путь с нее
@@ -325,14 +326,14 @@ def manageNode(node, paths, pathsWithNode):
         pathsWithNode[node.ID] = {}
     for pathId in paths:
         if pathId in pathsWithNode[node.ID]: #-- Если путь уже включал ноду, замыкаем его
-            dumpPath(paths[pathId], node)
+            dumpPath(result, paths[pathId], node)
         else:
             paths[pathId] += [node] #-- Если путь еще не включал ноду, добавляем ноду
             pathsWithNode[node.ID][pathId] = True  #-- Регистрируем путь под ключом ноды
             pathsInWork[pathId] = paths[pathId] # Незамкнутые пути отправляются дальше по итерированию
     if len(pathsInWork): # Если есть что итерировать дальше
         for nextNode in node.nextNodes:
-            manageNode(nextNode, pathsInWork, pathsWithNode)
+            manageNode(nextNode, pathsInWork, pathsWithNode, result)
     for pathId in pathsInWork: # Удаляем последнюю ноду из всех путей, над которыми работали
         pathsInWork[pathId].pop()
         pathsWithNode[node.ID].pop(pathId, None) # Удаляем регистрацию путей под нашей точкой
@@ -352,10 +353,10 @@ def restore_arrays_all(graph, all_starts = 0):
         for j in np.arange(graph.shape[1]):
             if graph[k,j] > 0:
                 nodes[k].nextNodes += nodes[j]
-    answ = []
+    result = []
     for node_id in unvisitedNodes:
-        manageNode(nodes[node_id], paths, pathsWithNode)
-
+        manageNode(nodes[node_id], paths, pathsWithNode, result)
+    return result
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
 #     # print(candidates)
