@@ -300,11 +300,10 @@ def dumpPath(result, path, node = False):
     newPath = path[:]
     if node:
         newPath += [node]
-    result.extend(newPath)
-  #  result = ''
-  #  for node in newPath:
-  #      result += str(node.ID)
-   # print(result)
+    newPatharr = []
+    for node in newPath:
+        newPatharr.append(node.ID)
+    result.extend(newPatharr)
     
     
 def manageNode(node, paths, pathsWithNode, result, unvisitedNodes):
