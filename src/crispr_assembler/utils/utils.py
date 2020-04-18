@@ -366,7 +366,7 @@ def restore_arrays_all(graph, all_starts = 0):
         return f_a
 
     return result
-    #pip install git+https://github.com/margo311/CRISPR_assembler --upgrade
+    #return result
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
 #     # print(candidates)
