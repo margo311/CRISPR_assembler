@@ -329,9 +329,8 @@ def restore_arrays_all(graph, all_starts = 0):
                 f_a.append(array)
         return f_a
 
-    return answ, merge(answ)
-
-
+    return answ
+    
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
 #     # print(candidates)
