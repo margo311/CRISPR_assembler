@@ -333,7 +333,7 @@ def restore_arrays_all(graph, all_starts = 0):
     return answ, merge(answ)
 
 
-=======
+
 class Node:
     visitedNodes = 0
     def __init__(self, ID):
@@ -341,9 +341,9 @@ class Node:
         self.visited = False
         self.nextNodes = []
 
-    def visit()
+    def visit():
         if not self.visited
-            Node.visitedNodes += 1
+            Node.visitedNodes = Node.visitedNodes + 1
         self.visited = true
 
 def manageNode(node, result, path = []):
@@ -382,7 +382,6 @@ def restore_arrays_all(graphInit, all_starts = 0):
 
     return result
     
->>>>>>> Stashed changes
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
 #     # print(candidates)
