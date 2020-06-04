@@ -290,6 +290,7 @@ def get_top_stats(graph, i, cut=10, axis=0):
     return np.array(sorted(graph[i])[::-1][:10]), np.argsort(graph[i])[::-1][:10]
 
 
+<<<<<<< Updated upstream
 def get_routes_all(graph, route, routes, vertex):
     candidates = np.where(graph[vertex] > 0)[0]
 
@@ -332,6 +333,56 @@ def restore_arrays_all(graph, all_starts = 0):
     return answ, merge(answ)
 
 
+=======
+class Node:
+    visitedNodes = 0
+    def __init__(self, ID):
+        self.ID = ID
+        self.visited = False
+        self.nextNodes = []
+
+    def visit()
+        if not self.visited
+            Node.visitedNodes += 1
+        self.visited = true
+
+def manageNode(node, result, path = []):
+    node.visit()
+    if node in path:
+        dumpPath(result, path, node) # Обрываем циклы
+        return
+    if not node.nextNodes:
+        dumpPath(result, path, node)
+        return
+    path.append(node)
+    for nextNode in node.nextNodes:
+        manageNode(nextNode, result, result)
+    path.pop(node)
+
+def restore_arrays_all(graphInit, all_starts = 0):
+    order = np.argsort(-np.sum(graphInit, 0))
+    graphSorted = graphInit[order, order]
+    nodes = dict(zip(np.arange(graphSorted.shape[0]) , [Node(k) for k in np.arange(graphSorted.shape[0])]))
+    for k in np.arange(graphSorted.shape[0]):
+        for j in np.arange(graphSorted.shape[1]):
+            if graphSorted[k,j] > 0:
+                nodes[k].nextNodes.append(nodes[j])
+    result = []
+    int i = 0
+    while i < graphSorted.shape[0] and Node.visitedNodes < graphSorted.shape[0]:
+        manageNode(nodes[i], result)
+        
+    # def merge(a):
+    #     a_s = sorted(a, key=len)[::-1]
+    #     f_a = []
+    #     for array in tqdm_notebook(a_s):
+    #         if not a_in_any_b(array, f_a):
+    #             f_a.append(array)
+    #     return f_a
+
+    return result
+    
+>>>>>>> Stashed changes
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
 #     # print(candidates)
