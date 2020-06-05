@@ -338,7 +338,7 @@ def restore_arrays_all(graphInit):
         manageNode(nodes[i], result)
         i += 1
     for p in np.arange(len(result) - 1):
-        for n in np.arange(len(path) - 1):
+        for n in np.arange(len(result[p]) - 1):
             result[p][n] = order[result[p][n]]
     return result
 
