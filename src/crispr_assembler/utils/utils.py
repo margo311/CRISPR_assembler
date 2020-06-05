@@ -335,7 +335,8 @@ def restore_arrays_all(graphInit):
     i = 0
     graphSortedShape = graphSorted.shape[0]
     while i < graphSortedShape and Node.visitedNodes < graphSortedShape:
-        manageNode(nodes[i], result)
+        if not nodes[i].visited:
+            manageNode(nodes[i], result)
         i += 1
     for p in np.arange(len(result)):
         for n in np.arange(len(result[p])):
