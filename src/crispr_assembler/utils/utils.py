@@ -290,50 +290,6 @@ def get_top_stats(graph, i, cut=10, axis=0):
     return np.array(sorted(graph[i])[::-1][:10]), np.argsort(graph[i])[::-1][:10]
 
 
-<<<<<<< Updated upstream
-def get_routes_all(graph, route, routes, vertex):
-    candidates = np.where(graph[vertex] > 0)[0]
-
-    if len(candidates) == 0:
-        routes.append(route)
-    else:
-        is_final = 1
-        for candidate in candidates:
-            if not candidate in route:
-                is_final = 0
-                new_route = [x for x in route]
-                new_route.append(candidate)
-                get_routes_all(graph, new_route, routes, candidate)
-        if is_final:
-            routes.append(route)
-
-
-def restore_arrays_all(graph, all_starts = 0):
-    start_vertexes = np.where(graph.sum(0) == 0)[0]
-    if all_starts:
-        start_vertexes = np.arange(graph.shape[0])
-
-    answ = []
-
-    for vertex in tqdm_notebook(start_vertexes):
-        routes = []
-        route = [vertex]
-        get_routes_all(graph, route, routes, vertex)
-
-        answ.extend(routes)
-
-    def merge(a):
-        a_s = sorted(a, key=len)[::-1]
-        f_a = []
-        for array in tqdm_notebook(a_s):
-            if not a_in_any_b(array, f_a):
-                f_a.append(array)
-        return f_a
-
-    return answ, merge(answ)
-
-
-
 class Node:
     visitedNodes = 0
     def __init__(self, ID):
@@ -341,47 +297,42 @@ class Node:
         self.visited = False
         self.nextNodes = []
 
-    def visit():
-        if not self.visited
-            Node.visitedNodes = Node.visitedNodes + 1
-        self.visited = true
-
-def manageNode(node, result, path = []):
-    node.visit()
-    if node in path:
-        dumpPath(result, path, node) # Обрываем циклы
+def manageNode(node, result, path = [], usedNodes = {}):
+    if not node.visited:
+        Node.visitedNodes += 1
+        node.visited = True
+    if node.ID in usedNodes:
+        dumpPath(result, path, node)
         return
     if not node.nextNodes:
         dumpPath(result, path, node)
         return
     path.append(node)
+    usedNodes[node.ID] = True
     for nextNode in node.nextNodes:
-        manageNode(nextNode, result, result)
-    path.pop(node)
+        manageNode(nextNode, result, path, usedNodes)
+    path.pop()
+    usedNodes.pop(node.ID, None)
 
-def restore_arrays_all(graphInit, all_starts = 0):
-    order = np.argsort(-np.sum(graphInit, 0))
-    graphSorted = graphInit[order, order]
+def restore_arrays_all(graphInit):
+    order = np.argsort(np.sum(graphInit, 0))
+    graphSorted = graphInit[:, order][order, :]
     nodes = dict(zip(np.arange(graphSorted.shape[0]) , [Node(k) for k in np.arange(graphSorted.shape[0])]))
     for k in np.arange(graphSorted.shape[0]):
         for j in np.arange(graphSorted.shape[1]):
             if graphSorted[k,j] > 0:
                 nodes[k].nextNodes.append(nodes[j])
     result = []
-    int i = 0
-    while i < graphSorted.shape[0] and Node.visitedNodes < graphSorted.shape[0]:
+    i = 0
+    startTime = int(round(time.time() * 1000))
+    graphSortedShape = graphSorted.shape[0]
+    while i < graphSortedShape and Node.visitedNodes < graphSortedShape:
         manageNode(nodes[i], result)
-        
-    # def merge(a):
-    #     a_s = sorted(a, key=len)[::-1]
-    #     f_a = []
-    #     for array in tqdm_notebook(a_s):
-    #         if not a_in_any_b(array, f_a):
-    #             f_a.append(array)
-    #     return f_a
-
+        i += 1
+    endTime = int(round(time.time() * 1000))
+    # print(endTime - startTime)
     return result
-    
+
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
 #     candidates = np.where(graph[vertex] > 0)[0]
 #     # print(candidates)
