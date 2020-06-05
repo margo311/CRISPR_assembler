@@ -324,13 +324,10 @@ def restore_arrays_all(graphInit):
                 nodes[k].nextNodes.append(nodes[j])
     result = []
     i = 0
-    startTime = int(round(time.time() * 1000))
     graphSortedShape = graphSorted.shape[0]
     while i < graphSortedShape and Node.visitedNodes < graphSortedShape:
         manageNode(nodes[i], result)
         i += 1
-    endTime = int(round(time.time() * 1000))
-    # print(endTime - startTime)
     return result
 
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
