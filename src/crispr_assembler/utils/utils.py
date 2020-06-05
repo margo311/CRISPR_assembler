@@ -324,6 +324,7 @@ def manageNode(node, result, path = [], usedNodes = {}):
     usedNodes.pop(node.ID, None)
 
 def restore_arrays_all(graphInit):
+    Node.visitedNodes = 0
     order = np.argsort(np.sum(graphInit, 0))
     graphSorted = graphInit[:, order][order, :]
     nodes = dict(zip(np.arange(graphSorted.shape[0]) , [Node(k) for k in np.arange(graphSorted.shape[0])]))
