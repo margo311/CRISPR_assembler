@@ -297,6 +297,15 @@ class Node:
         self.visited = False
         self.nextNodes = []
 
+def dumpPath(result, path, node = False):
+    newPath = path[:]
+    if node:
+        newPath += [node]
+    newPatharr = []
+    for node in newPath:
+        newPatharr.append(node.ID)
+    result.append(newPatharr)
+    
 def manageNode(node, result, path = [], usedNodes = {}):
     if not node.visited:
         Node.visitedNodes += 1
