@@ -337,6 +337,9 @@ def restore_arrays_all(graphInit):
     while i < graphSortedShape and Node.visitedNodes < graphSortedShape:
         manageNode(nodes[i], result)
         i += 1
+    for path in result:
+        for node in path:
+            node = order[node]
     return result
 
 # def get_routes_limited(graph, route, routes, vertex, verbose=0):
